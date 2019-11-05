@@ -44,7 +44,19 @@
 	output DP-5 position 3840 0
 
 	# Wallpaper
-	output @ bg $HOME/Pictures/colemakvim2.jpg fit
+	output * bg $HOME/Pictures/colemakvim2.jpg fit
+	
+	# Set Workspaces for each output
+	workspace $ws1 output DP-3
+	workspace $ws2 output DP-3
+	workspace $ws3 output DP-3
+	workspace $ws4 output DP-4
+	workspace $ws5 output DP-4
+	workspace $ws6 output DP-4
+	workspace $ws7 output DP-5
+	workspace $ws8 output DP-5
+	workspace $ws9 output DP-5
+
 
 #
 # Input Configurations
@@ -59,9 +71,9 @@
 
 	# Keyboard
 	input * xkb_layout "us"
-	input * xkb_variant "colemak"
+	#input * xkb_variant "colemak"
 	input * xkb_options "caps:backspace"
-	input "MANUFACTURER1 Keyboard: xkbmodel "microsoft4000"
+	input "MANUFACTURER1 Keyboard" xkb_model "microsoft4000"
 
 
 #
@@ -75,7 +87,8 @@
 	gaps inner $gapsin
 	gaps outer $gapsout
 	smart_gaps on
-
+	# Focus windows on activation
+	focus_on_window_activation focus 
 	# #---Dropdown Windows---# #
 	# General dropdown window traits. The order can matter.
 	for_window [title="Dropdown *"] floating enable
@@ -170,9 +183,9 @@
 	bindsym $mod+8 workspace $ws8
 	bindsym $mod+9 workspace $ws9
 
-	bindsym $mod+, workspace prev
-	bindsym $mod+. workspace next
-	bindsym $mod+/ workspace back_and_forth
+	bindsym $mod+comma workspace prev
+	bindsym $mod+period workspace next
+	bindsym $mod+slash workspace back_and_forth
 
 	# Move focused container to workspace
 	bindsym $mod+Shift+1 move container to workspace $ws1
@@ -185,16 +198,16 @@
 	bindsym $mod+Shift+8 move container to workspace $ws8
 	bindsym $mod+Shift+9 move container to workspace $ws9
 
-	bindsym $mod+Shift+, move workspace to output prev
-	bindsym $mod+Shift+. move workspace to output next
+	bindsym $mod+Shift+comma move workspace to output prev
+	bindsym $mod+Shift+period move workspace to output next
 	# bindsym $mod+Shift+/ exec swap-workspaces.sh
 
 #
 # Layout stuff:
 #
 	# change between horizontal and vertical split
-	bindsym $mod+\ splith
-	bindsym $mod+Shift+\ splitv
+	bindsym $mod+backslash splith
+	bindsym $mod+Shift+backslash splitv
 
 	# Toggle layout between tabs and split
 	bindsym $mod+Tab layout toggle tabbed split
@@ -212,7 +225,7 @@
 # Scratchpad
 #
 	# Calculator scratchpad
-	bindsym $mod$+c exec ddspawn.sh Calculator
+	bindsym $mod+c exec ddspawn.sh Calculator
 	# Terminal scratchpad
 	bindsym $mod+Shift+Return ddspawn.sh Terminal
 
@@ -262,7 +275,7 @@
 	# Act on last item copied to clipboard
 	#bindsym $mod+Shift+y exec clip-actions.sh
 	# Emergency Key
-	#bindsym $mod+; exec emergency-hide.sh
+	#bindsym $mod+semicolon exec emergency-hide.sh
 	# Lock and turn display(s) off
 	bindsym $mod+s exec lock-screen-off.sh
 	# Lock and Suspend Thinkpad
@@ -288,7 +301,7 @@
 	# Screenshot 
 	#bindsym Print exec grim
 	# Screenshot area
-	#bindsym $mod+Print exec grim slurp
+	bindsym $mod+Print exec slurp | grim -g -- | wl-copy
 
 #
 # Media Keybindings
@@ -303,7 +316,9 @@
 	# Dropdown Terminal
 	exec ddspawn.sh Terminal
 	# Start on workspace 4: Term
-	exec swaymsg workspace 4
+	exec swaymsg workspace $ws4
+	# Start mako - notifications
+	exec mako
 
 	# Waybar
 	exec waybar

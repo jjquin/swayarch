@@ -1,0 +1,8 @@
+Power Menu,"rofi_csv Power"
+ThinkPad Menu,"rofi_csv ThinkPad"
+Sway KeyBindings,"dmenu_hotkeys"
+BitWarden Passwords,"bwmenu -- -columns 2"
+Calculator,rofi-calculator
+Web Search,web-search
+Window Switcher,swytch
+Font Awesome Icons,rofi-fontawesome

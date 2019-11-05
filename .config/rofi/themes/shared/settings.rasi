@@ -1,0 +1,11 @@
+/**
+ * Allows to change the settings of every menu simply by editing this file
+ */
+@import "colorschemes/dark-steel-blue.rasi"
+@import "resolutions/1920x1080_sm.rasi"
+
+/* #window {
+  width: 50%;
+  height: 50%;
+} */
+

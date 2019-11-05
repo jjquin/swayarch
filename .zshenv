@@ -16,3 +16,4 @@ export BROWSER=firefox
 export FILE=ranger
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export ZDOTDIR="$XDG_CONFIG_HOME/shell/"
+export DOCKSTATUS="undocked"

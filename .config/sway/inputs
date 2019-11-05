@@ -1,0 +1,18 @@
+#
+# Input Configurations
+#
+	# Trackpad
+	input "1739:0:Synaptics_TM3053-004" {
+		dwt enabled
+	       	tap enabled
+	       	natural_scroll enabled              
+	       	middle_emulation enabled
+	}	
+
+	# Keyboard
+	input * xkb_layout "us"
+	#input * xkb_variant "colemak"
+	input * xkb_options "caps:backspace"
+	input "MANUFACTURER1 Keyboard" xkb_model "microsoft4000"
+
+

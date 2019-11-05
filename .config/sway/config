@@ -8,6 +8,9 @@
 #
 	# Super key = mod key
 	set $mod Mod4
+
+	# Sway Configuration Directory
+	set $confdir $XDG_CONFIG_DIR/sway
 	
 	# Movement keys - colemak layout
 	set $left j
@@ -16,7 +19,11 @@
 	set $down k
 	
 	# Application Launcher
-	set $menu dmenu_path | dmenu | xargs swaymsg exec --
+	#set $menu dmenu_path | dmenu | xargs swaymsg exec --
+	set $menu rofi -show drun -columns 2
+
+	# Current Outputs depending on dock status
+	set $curr_outputs $DOCKSTATUS
 
 	# Workspaces
 	Set $ws1 "1: WWW"
@@ -33,280 +40,24 @@
 	set $gapsin 5
 	set $gapsout 5
 
-#
-# Output Configuration
 # 
-	# Setup monitors when docked
-	output eDP-1 disable
-	output DP-5 enable
-	output DP-3 position 0 0
-	output DP-4 position 1920 0
-	output DP-5 position 3840 0
-
-	# Wallpaper
-	output * bg $HOME/Pictures/colemakvim2.jpg fit
-	
-	# Set Workspaces for each output
-	workspace $ws1 output DP-3
-	workspace $ws2 output DP-3
-	workspace $ws3 output DP-3
-	workspace $ws4 output DP-4
-	workspace $ws5 output DP-4
-	workspace $ws6 output DP-4
-	workspace $ws7 output DP-5
-	workspace $ws8 output DP-5
-	workspace $ws9 output DP-5
-
-
+# Include other files
 #
-# Input Configurations
-#
-	# Trackpad
-	input "1739:0:Synaptics_TM3053-004" {
-		dwt enabled
-	       	tap enabled
-	       	natural_scroll enabled              
-	       	middle_emulation enabled
-	}	
+	# Include Sway Default Settings
+	include $confdir/defaults
 
-	# Keyboard
-	input * xkb_layout "us"
-	#input * xkb_variant "colemak"
-	input * xkb_options "caps:backspace"
-	input "MANUFACTURER1 Keyboard" xkb_model "microsoft4000"
+	# Include KeyBindings
+	include $confdir/keybindings
 
+	# Include Outputs
+	include $confdir/$curr_outputs
 
-#
-# Basic Definitions
-#
-	# Borders
-	for_window [class="^.*"] border pixel 2
-	default_border pixel 2
-	default_floating_border pixel 4
-	# Gaps
-	gaps inner $gapsin
-	gaps outer $gapsout
-	smart_gaps on
-	# Focus windows on activation
-	focus_on_window_activation focus 
-	# #---Dropdown Windows---# #
-	# General dropdown window traits. The order can matter.
-	for_window [title="Dropdown *"] floating enable
-	for_window [title="Dropdown *"] move scratchpad
-	for_window [title="Dropdown *"] sticky enable
-	for_window [title="Dropdown *"] scratchpad show
-	for_window [title="Dropdown *"] resize set 625 450
-	for_window [title="Dropdown *"] border pixel 3
-	for_window [title="Dropdown *"] move position center
+	# Include Inputs
+	include $confdir/inputs
 
-#
-# Idle/Lock Configuration
-# 
-	# Lock after 5 min, displays off after 10 min, lock after suspend
-	exec swayidle -w \
-		timeout 300 'swaylock -f -c 000000' \
-		timeout 600 'swaymsg "output * dpms off"' \
-			resume 'swaymsg "output * dpms on"' \
-		before-sleep 'swaylock -f -c 000000'
+	# Including Window Rules
+	include $confdir/window_rules
 
-#
-# Basic Keybindings:
-#
-	# Drag and resize floating windows with $mod key
-	floating_modifier $mod normal
-
-	# Kill focused window
-	bindsym $mod+q kill
-	bindsym $mod+Shift+q kill -9 'ydotool getwindowfocus getwindowpid'
-
-	# Reload configuration
-	bindsym $mod+Shift+c reload
-
-	# Exit sway 
-	set $mode_system System: (l) lock, (o) logout, (s) suspend, (r) reboot, (d) shutdown, (f) reboot to firmware
-	mode "$mode_system" {
-	    	bindsym l exec $lock, mode "default"
-	    	bindsym o exit
-	    	bindsym s exec --no-startup-id systemctl suspend, mode "default"
-	    	bindsym r exec --no-startup-id systemctl reboot, mode "default"
-	    	bindsym d exec --no-startup-id systemctl poweroff -i, mode "default"
-	    	bindsym f exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
-	
-	    	# return to default mode
-	    	bindsym Return mode "default"
-	    	bindsym Escape mode "default"
-	}
-	bindsym $mod+x mode "$mode_system"
-	
-	# Reset Gaps to default
-	bindsym $mod+g gaps inner $gapsin, gaps outer $gapsout
-	# Remove Gaps
-	bindsym $mod+Shift+g gaps inner 0, gaps outer 0
-
-#
-# Movement Keybindings:
-#
-	# Move your focus around
-	bindsym $mod+$left focus left
-	bindsym $mod+$down focus down
-	bindsym $mod+$up focus up
-	bindsym $mod+$right focus right
-
-	# Or use arrow keys
-	bindsym $mod+Left focus left
-	bindsym $mod+Down focus down
-	bindsym $mod+Up focus up
-	bindsym $mod+Right focus right
-
-	# Move the focused window with the same, but add Shift
-	bindsym $mod+Shift+$left move left
-	bindsym $mod+Shift+$down move down
-	bindsym $mod+Shift+$up move up
-	bindsym $mod+Shift+$right move right
-	# Ditto, with arrow keys
-	bindsym $mod+Shift+Left move left
-	bindsym $mod+Shift+Down move down
-	bindsym $mod+Shift+Up move up
-	bindsym $mod+Shift+Right move right
-
-#
-# Workspaces:
-#
-	# Switch to workspace
-	bindsym $mod+1 workspace $ws1
-	bindsym $mod+2 workspace $ws2
-	bindsym $mod+3 workspace $ws3
-	bindsym $mod+4 workspace $ws4
-	bindsym $mod+5 workspace $ws5
-	bindsym $mod+6 workspace $ws6
-	bindsym $mod+7 workspace $ws7
-	bindsym $mod+8 workspace $ws8
-	bindsym $mod+9 workspace $ws9
-
-	bindsym $mod+comma workspace prev
-	bindsym $mod+period workspace next
-	bindsym $mod+slash workspace back_and_forth
-
-	# Move focused container to workspace
-	bindsym $mod+Shift+1 move container to workspace $ws1
-	bindsym $mod+Shift+2 move container to workspace $ws2
-	bindsym $mod+Shift+3 move container to workspace $ws3
-	bindsym $mod+Shift+4 move container to workspace $ws4
-	bindsym $mod+Shift+5 move container to workspace $ws5
-	bindsym $mod+Shift+6 move container to workspace $ws6
-	bindsym $mod+Shift+7 move container to workspace $ws7
-	bindsym $mod+Shift+8 move container to workspace $ws8
-	bindsym $mod+Shift+9 move container to workspace $ws9
-
-	bindsym $mod+Shift+comma move workspace to output prev
-	bindsym $mod+Shift+period move workspace to output next
-	# bindsym $mod+Shift+/ exec swap-workspaces.sh
-
-#
-# Layout stuff:
-#
-	# change between horizontal and vertical split
-	bindsym $mod+backslash splith
-	bindsym $mod+Shift+backslash splitv
-
-	# Toggle layout between tabs and split
-	bindsym $mod+Tab layout toggle tabbed split
-
-	# Make current focues window fullscreen
-	bindsym $mod+Shift+f fullscreen
-
-	# Toggle current window between tiled and floating
-	bindsym $mod+t floating toggle
-
-	# Swap focus between tiling and floating areas
-	bindsym $mod+Shift+t focus mode_toggle
-
-#
-# Scratchpad
-#
-	# Calculator scratchpad
-	bindsym $mod+c exec ddspawn.sh Calculator
-	# Terminal scratchpad
-	bindsym $mod+Shift+Return ddspawn.sh Terminal
-
-#
-# Resizing Containers:
-#
-	mode "resize" {
-    		# left will shrink the containers width
-    		# right will grow the containers width
-    		# up will shrink the containers height    # down will grow the containers height
-    		bindsym $left resize shrink width 10px
-    		bindsym $down resize grow height 10px
-    		bindsym $up resize shrink height 10px
-    		bindsym $right resize grow width 10px
-
-    		# Ditto, with arrow keys
-    		bindsym Left resize shrink width 10px
-    		bindsym Down resize grow height 10px
-    		bindsym Up resize shrink height 10px
-    		bindsym Right resize grow width 10px
-
-    		# Return to default mode
-    		bindsym Return mode "default"    
-		bindsym Escape mode "default"
-	}		
-	bindsym $mod+r mode "resize"
-
-#
-# Application Keybindings
-#
-	# Menu launcher
-	bindsym $mod+Space exec $menu
-	# Start terminal
-	bindsym $mod+Return exec $TERMINAL
-	# Web browser 
-	bindsym $mod+w exec $BROWSER
-	# Secondary Web browser 
-	bindsym $mod+Shift+w exec qutebrowser
-	# File manager
-	bindsym $mod+f exec $FILE
-	# Bitwarden menu
-	#bindsym $mod+p exec bitw-pass.sh
-	# Bitwarden
-	bindsym $mod+Shift+p exec bitwarden
-	# View Clipboard History
-	bindsym $mod+y exec clipman
-	# Act on last item copied to clipboard
-	#bindsym $mod+Shift+y exec clip-actions.sh
-	# Emergency Key
-	#bindsym $mod+semicolon exec emergency-hide.sh
-	# Lock and turn display(s) off
-	bindsym $mod+s exec lock-screen-off.sh
-	# Lock and Suspend Thinkpad
-	#bindsym $mod+Shift+s lock.sh suspend
-	# Dock/Undock Thinkpad
-	#bindsym $mod+d exec thinkpad-dock.sh
-	# Network Manager Configuration
-	#bindsym $mod+n exec spawn Network
-	# Email Thunderbird
-	bindsym $mod+e exec thunderbird
-	# PDF View - Zathura
-	bindsym $mod+z exec zathura
-	# Video - MPV
-	bindsym $mod+v exec mpv
-	# Video - VLC
-	bindsym $mod+Shift+v exec vlc
-	# Books - Calibre
-	bindsym $mod+b exec calibre
-	# Bluetooth configuration
-	#bindsym $mod+Shift+b exec bluez
-	# Music - Lollypop
-	bindsym $mod+m exec lollypop
-	# Screenshot 
-	#bindsym Print exec grim
-	# Screenshot area
-	bindsym $mod+Print exec slurp | grim -g -- | wl-copy
-
-#
-# Media Keybindings
-#
-	# Lower Volume small
 
 #
 # Startup Programs
@@ -317,6 +68,8 @@
 	exec ddspawn.sh Terminal
 	# Start on workspace 4: Term
 	exec swaymsg workspace $ws4
+	# Start terminal
+	exec $TERMINAL
 	# Start mako - notifications
 	exec mako
 

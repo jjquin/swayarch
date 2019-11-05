@@ -1,0 +1,208 @@
+
+#
+# Basic Keybindings:
+#
+	# Drag and resize floating windows with $mod key
+	floating_modifier $mod normal
+
+	# %%mod+q: Kill focused window %%
+	bindsym $mod+q kill
+	# %%mod+shift+q: Kill focused window with predjudice %%
+	bindsym $mod+Shift+q kill -9 'ydotool getwindowfocus getwindowpid'
+
+	# %%$mod+Shift+c: Reload Sway configuration %%
+	bindsym $mod+Shift+c reload
+
+	# %%$mod+x: Power Menu (Shutdown, Reboot, etc) %% 
+	bindsym $mod+x exec rofi_csv Power
+	
+	# %%$mod+g: Reset Gaps to default %%
+	bindsym $mod+g gaps inner $gapsin, gaps outer $gapsout
+	# %%$mod+Shift+g: Remove Gaps
+	bindsym $mod+Shift+g gaps inner 0, gaps outer 0
+
+#
+# Movement Keybindings:
+#
+	# %%$mod+$left: Focus on window to the left %%
+	bindsym $mod+$left focus left
+	# %%$mod+$right: Focus on window below %%
+	bindsym $mod+$down focus down
+	# %%$mod+$up: Focus on window above %%
+	bindsym $mod+$up focus up
+	# %%$mod+$right: Focus on window to the right %%
+	bindsym $mod+$right focus right
+
+	# Or use arrow keys
+	bindsym $mod+Left focus left
+	bindsym $mod+Down focus down
+	bindsym $mod+Up focus up
+	bindsym $mod+Right focus right
+
+	# %%$mod+Shift+$left: Move focused window to the left %%
+	bindsym $mod+Shift+$left move left
+	# %%$mod+Shift+$down: Move focused window down %%
+	bindsym $mod+Shift+$down move down
+	# %%$mod+Shift+$down: Move focused window up %%
+	bindsym $mod+Shift+$up move up
+	# %%$mod+Shift+$right: Move focused window to the right %%
+	bindsym $mod+Shift+$right move right
+
+	# Ditto, with arrow keys
+	bindsym $mod+Shift+Left move left
+	bindsym $mod+Shift+Down move down
+	bindsym $mod+Shift+Up move up
+	bindsym $mod+Shift+Right move right
+
+#
+# Workspaces:
+#
+	# %%$mod+Numberkey: Switch to workspace of same number %%
+	bindsym $mod+1 workspace $ws1
+	bindsym $mod+2 workspace $ws2
+	bindsym $mod+3 workspace $ws3
+	bindsym $mod+4 workspace $ws4
+	bindsym $mod+5 workspace $ws5
+	bindsym $mod+6 workspace $ws6
+	bindsym $mod+7 workspace $ws7
+	bindsym $mod+8 workspace $ws8
+	bindsym $mod+9 workspace $ws9
+
+	# %%$mod+comma: Switch to previous workspace %%
+	bindsym $mod+comma workspace prev
+	# %%$mod+period: Switch to next workspace %%
+	bindsym $mod+period workspace next
+	# %%$mod+slash: Switch workspack back and forth %%
+	bindsym $mod+slash workspace back_and_forth 
+
+	# %%mod+Shift+Numberkey: Move focused window to workspace of same number %%
+	bindsym $mod+Shift+1 move container to workspace $ws1
+	bindsym $mod+Shift+2 move container to workspace $ws2
+	bindsym $mod+Shift+3 move container to workspace $ws3
+	bindsym $mod+Shift+4 move container to workspace $ws4
+	bindsym $mod+Shift+5 move container to workspace $ws5
+	bindsym $mod+Shift+6 move container to workspace $ws6
+	bindsym $mod+Shift+7 move container to workspace $ws7
+	bindsym $mod+Shift+8 move container to workspace $ws8
+	bindsym $mod+Shift+9 move container to workspace $ws9
+
+	# %%mod+Shift+comma: Move focused window to previous monitor %%
+	bindsym $mod+Shift+comma move workspace to output prev
+	# %%mod+Shift+period: Move focused window to next monitor %%
+	bindsym $mod+Shift+period move workspace to output next
+	# %%mod+Shift+slash: Swap workspaces between two monitors %%
+	# bindsym $mod+Shift+slash exec swap-workspaces.sh
+
+#
+# Layout stuff:
+#
+	# %%$mod+backslash: Change workspace layout to horizontal split %%
+	bindsym $mod+backslash splith
+	# %%$mod+Shift+backslash: Change workspace layout to vertical split %%
+	bindsym $mod+Shift+backslash splitv
+
+	# %%$mod+Tab: Toggle layout between tabbed and split %%
+	bindsym $mod+Tab layout toggle tabbed split
+
+	# %%$mod+Shift+f: Make focused window fullscreen %%
+	bindsym $mod+Shift+f fullscreen
+
+	# %%$mod+t: Toggle focused window between tiled and floating %%
+	bindsym $mod+t floating toggle
+
+	# %%$mod+Shift+t: Swap focus between tiling and floating areas %%
+	bindsym $mod+Shift+t focus mode_toggle
+
+#
+# Scratchpad
+#
+	# %%$mod+c: Dropdown calculator scratchpad %%
+	bindsym $mod+c exec ddspawn.sh Calculator
+	# %%$mod+Shift+Return: Dropdown terminal scratchpad %%
+	bindsym $mod+Shift+Return ddspawn.sh Terminal
+
+#
+# Resizing Containers:
+#
+	mode "resize" {
+    		# left will shrink the containers width
+    		# right will grow the containers width
+    		# up will shrink the containers height    # down will grow the containers height
+    		bindsym $left resize shrink width 10px
+    		bindsym $down resize grow height 10px
+    		bindsym $up resize shrink height 10px
+    		bindsym $right resize grow width 10px
+
+    		# Ditto, with arrow keys
+    		bindsym Left resize shrink width 10px
+    		bindsym Down resize grow height 10px
+    		bindsym Up resize shrink height 10px
+    		bindsym Right resize grow width 10px
+
+    		# Return to default mode
+    		bindsym Return mode "default"    
+		bindsym Escape mode "default"
+	}		
+	# %%$mod+r: Resize focused window %%
+	bindsym $mod+r mode "resize"
+
+#
+# Application Keybindings
+#
+	# %%$mod+Space: Rofi Menu Launcher %%
+	bindsym $mod+Space exec $menu
+	bindsym Menu exec $menu
+	# %%$mod+Return: Launch default terminal %%
+	bindsym $mod+Return exec $TERMINAL
+	# %%$mod+w: Launch default web browser %%
+	bindsym $mod+w exec $BROWSER
+	# %%$mod+Shift+w launch secondary web browser %%
+	bindsym $mod+Shift+w exec qutebrowser
+	# %%$mod+f: Launch default file manager %%
+	bindsym $mod+f exec $FILE
+	# %%$mod+p: Rofi Bitwarden menu %%
+	bindsym $mod+p exec bwmenu -- -columns 2
+	# %%$mod+Shift+p: Launch Bitwarden %%
+	bindsym $mod+Shift+p exec bitwarden
+	# %%$mod+y: View Clipboard History %%
+	bindsym $mod+y exec clipman
+	# %%$mod+Shift+y: Act on last item copied to clipboard %%
+	#bindsym $mod+Shift+y exec clip-actions.sh
+	# %%$mod+semicolon: Emergency Key %%
+	#bindsym $mod+semicolon exec emergency-hide.sh
+	# %%$mod+s: Lock and turn display(s) off %%
+	bindsym $mod+s exec lock-screen-off.sh
+	# %%$mod+Shift+s: Lock and Suspend Thinkpad %%
+	#bindsym $mod+Shift+s lock.sh suspend
+	# %%$mod+d: Rofi Thinkpad menu %%
+	#bindsym $mod+d exec rofi_csv ThinkPad
+	# %%$mod+n: Launch Network Manager Configuration %%
+	bindsym $mod+n exec spawn Network
+	# %%$mod+e: Launchy Thunderbird %%
+	bindsym $mod+e exec thunderbird
+	# %%$mod+z: Luanch PDF Viewer Zathura %%
+	bindsym $mod+z exec zathura
+	# %%$mod+v: Launch MPV Video Player %%
+	bindsym $mod+v exec mpv
+	# %%$mod+Shift+v: Launch VLC Video Player %%
+	bindsym $mod+Shift+v exec vlc
+	# %%$mod+b: Launch Calibre eBook Manager %%
+	bindsym $mod+b exec calibre
+	# %%$mod+Shift+b: Launch Bluetooth configuration %%
+	#bindsym $mod+Shift+b exec bluez
+	# %%$mod+m: Launch Lollypop Music Player
+	bindsym $mod+m exec lollypop
+	# %%$mod+Shift+m: Rofi Music Control Menu %%
+	bindsym $mod+Shift+m exec rofi-mpc
+	# %%Print: Screenshot focused window %%
+	#bindsym Print exec screenshot window
+	# %%$mod+Print: Screenshot specific area %%
+	bindsym $mod+Print exec screenshot area
+	# %%$mod+Shift+Print: Screenshot whole screen %%
+	bindsym $mod+Shift+Print exec screenshot screen
+
+#
+# Media Keybindings
+#
+	# Lower Volume small
+

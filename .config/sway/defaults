@@ -1,0 +1,33 @@
+#
+# Basic Definitions
+#
+	# Borders
+	for_window [class="^.*"] border pixel 2
+	default_border pixel 2
+	default_floating_border pixel 4
+	# Gaps
+	gaps inner $gapsin
+	gaps outer $gapsout
+	smart_gaps on
+	# Focus windows on activation
+	focus_on_window_activation focus 
+	# #---Dropdown Windows---# #
+	# General dropdown window traits. The order can matter.
+	for_window [title="Dropdown *"] floating enable
+	for_window [title="Dropdown *"] move scratchpad
+	for_window [title="Dropdown *"] sticky enable
+	for_window [title="Dropdown *"] scratchpad show
+	for_window [title="Dropdown *"] resize set 625 450
+	for_window [title="Dropdown *"] border pixel 3
+	for_window [title="Dropdown *"] move position center
+
+#
+# Idle/Lock Configuration
+# 
+	# Lock after 5 min, displays off after 10 min, lock after suspend
+	exec swayidle -w \
+		timeout 300 'swaylock -f -c 000000' \
+		timeout 600 'swaymsg "output * dpms off"' \
+			resume 'swaymsg "output * dpms on"' \
+		before-sleep 'swaylock -f -c 000000'
+

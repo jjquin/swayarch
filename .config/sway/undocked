@@ -1,0 +1,23 @@
+#
+# Output configuration for undocked ThinkPad
+#
+	# Setup monitors when undocked
+	output DP-3 disable
+	output DP-4 disable
+	output DP-5 disable
+	output eDP-1 enable
+
+	# Wallpaper
+	output * bg $HOME/Pictures/colemakvim2.jpg fit
+	#exec sway_wallpaper
+
+	# Set Workspaces for each output
+	workspace $ws1 output eDP-1
+	workspace $ws2 output eDP-1
+	workspace $ws3 output eDP-1
+	workspace $ws4 output eDP-1
+	workspace $ws5 output eDP-1
+	workspace $ws6 output eDP-1
+	workspace $ws7 output eDP-1
+	workspace $ws8 output eDP-1
+	workspace $ws9 output eDP-1

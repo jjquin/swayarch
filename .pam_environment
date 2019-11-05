@@ -1,1 +1,0 @@
-PATH	OVERRIDE=@{HOME}/.local.bin:@{PATH}

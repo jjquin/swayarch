@@ -1,0 +1,19 @@
+#!/bin/bash
+
+TOUCHPAD="1739:0:Synaptics_TM3053-004"
+
+case $1 in
+on)
+	swaymsg input $TOUCHPAD events enabled
+	;;
+off)
+	swaymsg input $TOUCHPAD events disabled
+	;;
+*)
+	echo "invalid entry must be on or off"
+	exit 1
+	;;
+esac
+
+notify-send "Touchpad $1" -t 3000
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+if [ "$1" == "on" -o "$1" == "off" ]
+then
+	toggle="$1"
+else
+	if nmcli radio all | grep disabled
+	then
+		toggle="on"
+	else
+		toggle="off"
+	fi
+fi
+
+sudo nmcli radio all $toggle
+notify-send "Wireless $toggle" -t 1000

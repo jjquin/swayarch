@@ -16,11 +16,11 @@ then
 	swaymsg "[title=\"Dropdown $script\"] scratchpad show; [title=\"Dropdown $script\"] move position center"
 else
 	echo "Window not detected... spawning."
-	if [ $script = "Calculator" ]
+	if [ $script == "Calculator" ]
 	then
 		swaymsg exec "kitty --title \"Dropdown $script\" bc"
 	else
-		swaymsg exec "kitty --title \"Dropdown $script\" "
+		swaymsg exec "kitty --title \"Dropdown $script\""
 	fi
 	sleep 1
 	swaymsg "[title=\"Dropdown $script\"] move scratchpad"

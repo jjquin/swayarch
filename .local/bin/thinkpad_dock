@@ -1,0 +1,33 @@
+#!/bin/bash
+
+NODISPLAYS=$(echo $(swaymsg -t get_outputs | grep DP | wc -l ))
+DOCKSTATE=$1
+OUTPUTS_DIR="$HOME/.config/sway/outputs"
+
+if [ "$DOCKSTATE" != "docked" ] && [ "$DOCKSTATE" != "undocked" ]
+then
+	if [[ $NODISPLAYS -gt 2 ]]
+	then
+		DOCKSTATE="docked"
+	else
+		DOCKSTATE="undocked"
+	fi
+fi
+
+rm -f $OUTPUTS_DIR/current
+ln -s $OUTPUTS_DIR/$DOCKSTATE $OUTPUTS_DIR/current
+random_wallpaper set
+swaymsg reload
+
+if [ "$DOCKSTATE" == "docked" ]
+then
+	wifi_toggle off
+	touchpad_toggle off
+	# bluetooth_toggle off
+else
+	wifi_toggle on
+	touchpad_toggle on
+	# bluetooth_toggle on
+fi
+
+

@@ -1,3 +1,4 @@
+export PATH="$HOME/.local/bin:$PATH"
 export XDG_DESKTOP_DIR="$HOME/"
 export PAGER=less
 export MANPAGER=less
@@ -15,3 +16,6 @@ export BROWSER=firefox
 export FILE=ranger
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export ZDOTDIR="$XDG_CONFIG_HOME/shell/"
+
+source /home/jj/.config/shell/.zshrc
+

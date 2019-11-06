@@ -1,3 +1,5 @@
-rofi.theme:	themes/appsmenu
-rofi.font:	hack 12
-rofi.columns:	2`
+rofi.theme:		themes/appsmenu
+rofi.case-sensitive	false
+rofi.opacity		80
+rofi.face-transparency	true
+

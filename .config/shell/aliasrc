@@ -47,3 +47,6 @@ alias \
 
 alias dotf='/usr/bin/git --git-dir=$HOME/Code/dotfiles/ --work-tree=$HOME'
 
+alias yay='yay --answerdiff N'
+alias bc='bc ql'
+

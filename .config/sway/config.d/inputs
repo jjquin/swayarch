@@ -14,5 +14,6 @@
 	#input * xkb_variant "colemak"
 	input * xkb_options "caps:backspace"
 	input "MANUFACTURER1 Keyboard" xkb_model "microsoft4000"
+	input * xkb_numlock enable
 
 

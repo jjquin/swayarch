@@ -1,3 +1,4 @@
+#
 # Configuration file for Sway
 # 
 # $XDG_CONFIG_DIR/sway/config
@@ -8,9 +9,6 @@
 #
 	# Super key = mod key
 	set $mod Mod4
-
-	# Sway Configuration Directory
-	set $confdir $XDG_CONFIG_DIR/sway
 	
 	# Movement keys - colemak layout
 	set $left j
@@ -22,57 +20,69 @@
 	#set $menu dmenu_path | dmenu | xargs swaymsg exec --
 	set $menu rofi -show drun -columns 2
 
-	# Current Outputs depending on dock status
-	set $curr_outputs $DOCKSTATUS
+	# Screenshots
+	set $screenshot grim $HOME/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+	set $screenclip slurp | grim -g - $HOME/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 
 	# Workspaces
-	Set $ws1 "1: WWW"
-	Set $ws2 "2: Mail"
-	Set $ws3 "3: View"
-	Set $ws4 "4: Term"
-	Set $ws5 "5: Term"
-	Set $ws6 "6: File"
-	Set $ws7 "7: Media"
-	Set $ws8 "8: Other"
-	Set $ws9 "9: Any"
+	Set $ws1 1
+	Set $ws2 2
+	Set $ws3 3
+	Set $ws4 4
+	Set $ws5 5
+	Set $ws6 6
+	Set $ws7 7
+	Set $ws8 8
+	Set $ws9 9
 
 	# Gaps
 	set $gapsin 5
 	set $gapsout 5
 
+	# Colors
+	set $cl_high #009ddc
+	set $cl_indi #d9d8d8
+	set $cl_back #231f20
+	set $cl_fore #d9d8d8
+	set $cl_urge #ee2e24
+
 # 
 # Include other files
 #
-	# Include Sway Default Settings
-	include $confdir/defaults
-
-	# Include KeyBindings
-	include $confdir/keybindings
-
-	# Include Outputs
-	include $confdir/$curr_outputs
-
-	# Include Inputs
-	include $confdir/inputs
-
-	# Including Window Rules
-	include $confdir/window_rules
-
+	#Get Wallpaper Names
+	exec_always random_wallpaper set
+	# Include current theme
+	include $HOME/.config/sway/themes/current
+	include $HOME/.config/sway/themes/theme_settings
+	# Include current outputs
+	include $HOME/.config/sway/outputs/current
+	# Include files from config.d directory
+	include $HOME/.config/sway/config.d/*
+	
+	
 
 #
 # Startup Programs
 #
 	# Dropdown Calculator
-	exec ddspawn.sh Calculator
+	exec ddspawn Calculator
 	# Dropdown Terminal
-	exec ddspawn.sh Terminal
+	exec ddspawn Terminal
 	# Start on workspace 4: Term
 	exec swaymsg workspace $ws4
 	# Start terminal
 	exec $TERMINAL
 	# Start mako - notifications
 	exec mako
+	# Run Kanshi
+	#exec_always bash -c "killall kanshi; kanshi"
 
 	# Waybar
-	exec waybar
+	exec_always waybar_launch
 
+	# Start redshift
+	exec redshift_toggle
+	# Start Bluetooth applet
+	exec blueman-applet
+	# Start Network Manager Applet
+	exec 'nm-applet --indicator'

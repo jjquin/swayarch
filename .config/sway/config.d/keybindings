@@ -76,22 +76,22 @@
 	bindsym $mod+slash workspace back_and_forth 
 
 	# %%mod+Shift+Numberkey: Move focused window to workspace of same number %%
-	bindsym $mod+Shift+1 move container to workspace $ws1
-	bindsym $mod+Shift+2 move container to workspace $ws2
-	bindsym $mod+Shift+3 move container to workspace $ws3
-	bindsym $mod+Shift+4 move container to workspace $ws4
-	bindsym $mod+Shift+5 move container to workspace $ws5
-	bindsym $mod+Shift+6 move container to workspace $ws6
-	bindsym $mod+Shift+7 move container to workspace $ws7
-	bindsym $mod+Shift+8 move container to workspace $ws8
-	bindsym $mod+Shift+9 move container to workspace $ws9
+	bindsym $mod+Shift+1 move container to workspace $ws1, workspace $ws1
+	bindsym $mod+Shift+2 move container to workspace $ws2, workspace $ws2
+	bindsym $mod+Shift+3 move container to workspace $ws3, workspace $ws3
+	bindsym $mod+Shift+4 move container to workspace $ws4, workspace $ws4
+	bindsym $mod+Shift+5 move container to workspace $ws5, workspace $ws5
+	bindsym $mod+Shift+6 move container to workspace $ws6, workspace $ws6
+	bindsym $mod+Shift+7 move container to workspace $ws7, workspace $ws7
+	bindsym $mod+Shift+8 move container to workspace $ws8, workspace $ws8
+	bindsym $mod+Shift+9 move container to workspace $ws9, workspace $ws9
 
 	# %%mod+Shift+comma: Move focused window to previous monitor %%
-	bindsym $mod+Shift+comma move workspace to output prev
+	bindsym $mod+Shift+comma mark --add current; move container to output left; [con_mark="current"] focus; unmark current
 	# %%mod+Shift+period: Move focused window to next monitor %%
-	bindsym $mod+Shift+period move workspace to output next
+	bindsym $mod+Shift+period mark --add current; move container to output right; [con_mark="current"] focus; unmark current
 	# %%mod+Shift+slash: Swap workspaces between two monitors %%
-	# bindsym $mod+Shift+slash exec swap-workspaces.sh
+	bindsym $mod+Shift+slash exec swap-workspaces
 
 #
 # Layout stuff:
@@ -117,9 +117,9 @@
 # Scratchpad
 #
 	# %%$mod+c: Dropdown calculator scratchpad %%
-	bindsym $mod+c exec ddspawn.sh Calculator
+	bindsym $mod+c exec ddspawn Calculator
 	# %%$mod+Shift+Return: Dropdown terminal scratchpad %%
-	bindsym $mod+Shift+Return ddspawn.sh Terminal
+	bindsym $mod+Shift+Return exec ddspawn Terminal
 
 #
 # Resizing Containers:
@@ -155,54 +155,90 @@
 	# %%$mod+Return: Launch default terminal %%
 	bindsym $mod+Return exec $TERMINAL
 	# %%$mod+w: Launch default web browser %%
-	bindsym $mod+w exec $BROWSER
+	bindsym $mod+w exec spawn $BROWSER wwwbrowser
 	# %%$mod+Shift+w launch secondary web browser %%
-	bindsym $mod+Shift+w exec qutebrowser
+	bindsym $mod+Shift+w exec spawn qutebrowser vimbrowser
 	# %%$mod+f: Launch default file manager %%
-	bindsym $mod+f exec $FILE
+	bindsym $mod+f exec termspawn $FILE fileranger
 	# %%$mod+p: Rofi Bitwarden menu %%
 	bindsym $mod+p exec bwmenu -- -columns 2
 	# %%$mod+Shift+p: Launch Bitwarden %%
-	bindsym $mod+Shift+p exec bitwarden
+	bindsym $mod+Shift+p exec spawn bitwarden passmanager
 	# %%$mod+y: View Clipboard History %%
 	bindsym $mod+y exec clipman
 	# %%$mod+Shift+y: Act on last item copied to clipboard %%
 	#bindsym $mod+Shift+y exec clip-actions.sh
 	# %%$mod+semicolon: Emergency Key %%
-	#bindsym $mod+semicolon exec emergency-hide.sh
-	# %%$mod+s: Lock and turn display(s) off %%
-	bindsym $mod+s exec lock-screen-off.sh
+	#bindsym $mod+semicolon exec emergency-hide
+	# %%$mod+s: Lock screen %%
+	bindsym $mod+s exec lock
 	# %%$mod+Shift+s: Lock and Suspend Thinkpad %%
-	#bindsym $mod+Shift+s lock.sh suspend
+	bindsym $mod+Shift+s exec sudo systemctl suspend
 	# %%$mod+d: Rofi Thinkpad menu %%
-	#bindsym $mod+d exec rofi_csv ThinkPad
+	bindsym $mod+d exec rofi_csv ThinkPad
 	# %%$mod+n: Launch Network Manager Configuration %%
-	bindsym $mod+n exec spawn Network
+	bindsym $mod+n exec termspawn nmtui networknmtui
+	# %%$mod+Shift+n: Launch GUI Network Connection Editor %%
+	bindsym $mod+Shift+n exec spawn nm-connection-editor networkmanedit
 	# %%$mod+e: Launchy Thunderbird %%
-	bindsym $mod+e exec thunderbird
+	bindsym $mod+e exec spawn thunderbird emailtbird
 	# %%$mod+z: Luanch PDF Viewer Zathura %%
-	bindsym $mod+z exec zathura
+	bindsym $mod+z exec spawn zathura pdfview
 	# %%$mod+v: Launch MPV Video Player %%
-	bindsym $mod+v exec mpv
+	bindsym $mod+v exec spawn mpv mplayervideo
 	# %%$mod+Shift+v: Launch VLC Video Player %%
-	bindsym $mod+Shift+v exec vlc
+	bindsym $mod+Shift+v exec spawn vlc videolanplayer
 	# %%$mod+b: Launch Calibre eBook Manager %%
-	bindsym $mod+b exec calibre
+	bindsym $mod+b exec spawn calibre bookmanager
 	# %%$mod+Shift+b: Launch Bluetooth configuration %%
 	#bindsym $mod+Shift+b exec bluez
 	# %%$mod+m: Launch Lollypop Music Player
-	bindsym $mod+m exec lollypop
+	bindsym $mod+m exec spawn lollypop lolmusicplayer
 	# %%$mod+Shift+m: Rofi Music Control Menu %%
 	bindsym $mod+Shift+m exec rofi-mpc
-	# %%Print: Screenshot focused window %%
-	#bindsym Print exec screenshot window
-	# %%$mod+Print: Screenshot specific area %%
-	bindsym $mod+Print exec screenshot area
-	# %%$mod+Shift+Print: Screenshot whole screen %%
-	bindsym $mod+Shift+Print exec screenshot screen
+	# %%$mod+Print: Screenshot screen
+	bindsym $mod+Print exec $screenshot
+	# %%$mod+Shift+Print: Screenshot area
+	bindsym $mod+Shift+Print exec $screenclip
 
 #
 # Media Keybindings
 #
 	# Lower Volume small
+	
+#
+# Extra XF86 Keys
+#
+	# ThinkPad Special Keys
+# 	bindsym XF86AudioMute exec $mute
+# 	bindsym XF86AudioLowerVolume exec $audio_lower
+# 	bindsym XF86AudioRaiseVolume exec $audio_raise
+# 	bindsym XF86AudioMicMute exec mic_toggle
+ 	bindsym XF86MonBrightnessDown exec light -A 10
+ 	bindsym XF86MonBrightnessUP exec light -U 10
+# 	bindsym XF86Display exec $display_settings
+# 	bindsym XF86WLAN exec wifi_toggle
+# 	bindsym XF86Tools exec webcam_toggle
+# 	bindsym XF86Search exec web_search
+# 	bindsym xF86LaunchA exec $menu
+# 	bindsym XF86Explorer exec termspawn $FILE fileranger
+# 	
+# 	# Microsoft Natural Keyboard 4000 Special Keys
+# 	bindsym XF86HomePage exec spawn $BROWSER wwwbrowser
+# 	bindsym XF86Mail exec spawn thunderbird emailtbird
+# 	#bindsym XF86Launch5
+# 	#bindsym XF86Launch6
+# 	#bindsym XF86Launch7
+# 	#bindsym XF86Launch8
+# 	#bindsym XF86Launch9
+# 	bindsym XF86Favorites exec spawn qutebrowser vimbrowser
+# 	bindsym XF86AudioPlay exec $audio_play
+# 	bindsym XF86Calculator ddspawn Calculator
+# 	bindsym XF86Back workspace prev
+# 	bindsym XF86Forward workspace next
 
+#
+# ThinkPad Lidswitch
+# 
+	#bindswitch lid:on output eDP-1 disable
+	#bindswitch lid:off output eDP-1 enable

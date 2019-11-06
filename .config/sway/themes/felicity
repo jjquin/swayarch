@@ -1,0 +1,63 @@
+output * bg ~/Pictures/bg/felicity.jpg fill
+
+font pango: Lato Light 16
+
+#
+# Color definition
+#
+
+set $menu_bg #b0333333
+set $menu_fg #fff8f8f2
+set $menu_bgactive #d070C000
+set $menu_fgactive #fff8f8f2
+
+set $focused_bgcolor #70C000C0
+set $focused_textcolor #f8f8f2c0
+set $focused_indicator #f83333c0
+
+set $inactive_bgcolor #28283380
+set $inactive_textcolor #f8f8f2c0
+set $inactive_indicator #f83333c0
+
+set $unfocused_bgcolor #18183340
+set $unfocused_textcolor #f8f8f2c0
+set $unfocused_indicator #f83333c0
+
+set $urgent_bgcolor #CC7000C0
+set $urgent_textcolor #f8f8f2c0
+set $urgent_indicator #f83333c0
+
+set $statuscolor #00306080
+
+#
+# Appearance:
+#
+
+default_border normal 0
+gaps outer 0
+gaps inner 48
+
+
+client.focused $focused_bgcolor $focused_bgcolor $focused_textcolor $focused_indicator $focused_bgcolor
+client.focused_inactive $inactive_bgcolor $inactive_bgcolor $inactive_textcolor $inactive_indicator $inactive_bgcolor
+client.unfocused $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor $unfocused_indicator $unfocused_bgcolor
+client.urgent $urgent_bgcolor $urgent_bgcolor $urgent_textcolor $urgent_indicator $urgent_bgcolor
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+    font pango: Lato Light 16
+    colors {
+        focused_statusline $statuscolor
+        statusline $statuscolor
+        background #32323200
+        urgent_workspace $urgent_bgcolor $urgent_bgcolor $urgent_textcolor
+        focused_workspace $focused_bgcolor $focused_bgcolor $focused_textcolor
+        active_workspace $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor
+        inactive_workspace #00000000 #00000000 $inactive_textcolor
+    }
+}
+

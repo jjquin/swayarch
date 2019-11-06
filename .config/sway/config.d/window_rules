@@ -1,0 +1,54 @@
+#
+# Window Rules
+#
+	# Default workspaces for common programs
+	assign [app_id="^firefox$"] $ws1
+	assign [app_id="^kitty$"] $ws4
+	assign [app_id="^thunderbird$"] $ws2
+	assign [app_id="telegram|TelegramDesktop"] $ws3
+	assign [app_id="(VLC|mpv)"] $ws7
+	assign [app_id="lollypop"] $ws8
+	assign [app_id="emacs"] $ws5
+
+	# Rules for specific windows
+	for_window [app_id="gnome-(calendar|calculator|power-statistics|control-center)"] floating enable
+	for_window [app_id="org.gnome.(Nautilus|Weather)"] floating enable
+	for_window [app_id="(pavucontrol|psensor)"] floating enable
+
+        # #---Dropdown Windows---# #
+        # General dropdown window traits. The order can matter.
+        for_window [title="Dropdown *"] floating enable
+        for_window [title="Dropdown *"] move scratchpad
+        for_window [title="Dropdown *"] sticky enable
+        for_window [title="Dropdown *"] scratchpad show
+        for_window [title="Dropdown *"] resize set width 625
+        for_window [title="Dropdown *"] resize set height 400
+        for_window [title="Dropdown *"] border pixel 3
+        for_window [title="Dropdown *"] move position center	
+
+	# Auto float apps
+	for_window [app_id="gnome-calculator"] floating enable
+	for_window [class="^Gnome-commander$"] floating enable
+	for_window [app_id="keepassxc"] floating enable
+	for_window [class="^Lxappearance$"] floating enable
+	for_window [class="^mpv$"] floating enable
+	for_window [class="^Pavucontrol$"] floating enable
+	for_window [app_id="pavucontrol"] floating enable
+	for_window [class="^qBittorrent$"] floating enable
+	for_window [class="^Thunar$"] floating enable
+	for_window [class="^vlc$"] floating enable
+	for_window [app_id="tlp-ui"] floating enable
+	for_window [app_id="pamac-manager"] floating enable
+	for_window [title="Slack Call Minipanel"] floating enable
+	
+	# default floating
+	for_window [window_role="pop-up"] floating enable
+	for_window [window_role="bubble"] floating enable
+	for_window [window_role="task_dialog"] floating enable
+	for_window [window_role="Preferences"] floating enable
+	for_window [window_type="dialog"] floating enable
+	for_window [window_type="menu"] floating enable
+	for_window [instance="update_installer"] floating enable	
+	
+	# Tag xwayland windows as such
+	for_window [shell="xwayland"] title_format "<span>[X] %title</span>"

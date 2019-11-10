@@ -1,12 +1,8 @@
 #
 # Output Sway Configuration when ThinkPad Docked
 #
-        # Enable Desktop Displays
-        output eDP-1 	disable
-        output DP-5 	enable
-        output DP-3 	position 0 0
-        output DP-4 	position 1920 0
-        output DP-5 	position 3840 0
+        # Enable Displays using Kanshi
+	exec kanshi
 
         # Assign workspaces to correct display
         workspace 1 output DP-3 eDP-1
@@ -18,5 +14,5 @@
         workspace 7 output DP-5 eDP-1
         workspace 8 output DP-5 eDP-1
         workspace 9 output DP-5 eDP-1
-        workspace 10101010101010101010 output DP-5 eDP-1
+        workspace 10 output DP-5 eDP-1
 

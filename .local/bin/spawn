@@ -53,11 +53,21 @@ then
 elif [[ $results =~ "$lookup" ]]
 then
 	echo "$lookup detected"
-	swaymsg [title="(?i)$app"] focus
+	if [[ $lookup =~ "Dropdown $app" ]]
+	then
+		swaymsg "[title=\"$lookup\"] scratchpad show; [title=\"$lookup\"] move position center; [title=\"$lookup\"] resize set 800 900"
+	else
+		swaymsg [title="(?i)$app"] focus
+	fi
 else 
 	echo "$lookup not detected, launching"
 	swaymsg exec "$execs"
-
+	if [[ $lookup =~ "Dropdown $app" ]]
+	then
+		sleep 1
+        	swaymsg "[title=\"$lookup\"] move scratchpad"
+		swaymsg "[title=\"$lookup\"] scratchpad show; [title=\"$lookup\"] move position center; [title=\"$lookup\"] resize set 800 900"
+	fi
 fi
 
 

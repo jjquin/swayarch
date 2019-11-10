@@ -19,8 +19,20 @@
 	    	icon-theme:gtk-icon-theme-name \
 	    	cursor-theme:gtk-cursor-theme-name
 
-	# Sway Color Settings
-	client.focused	$focused_bgcolor $focused_bgcolor $focused_textcolor $focused_bgcolor $focused_bgcolor
-	client.focused_inactive $inactive_bgcolor $inactive_bgcolor $inactive_textcolor $inactive_bgcolor $inactive_bgcolor
-	client.unfocused $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor $unfocused_bgcolor $unfocused_bgcolor
-	client.urgent $urgent_bgcolor $urgent_bgcolor $urgent_textcolor $urgent_bgcolor $urgent_bgcolor
+# 	# Sway Color Settings
+# 	client.focused	$focused_bgcolor $focused_bgcolor $focused_textcolor $focused_bgcolor $focused_bgcolor
+# 	client.focused_inactive $inactive_bgcolor $inactive_bgcolor $inactive_textcolor $inactive_bgcolor $inactive_bgcolor
+# 	client.unfocused $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor $unfocused_bgcolor $unfocused_bgcolor
+# 	client.urgent $urgent_bgcolor $urgent_bgcolor $urgent_textcolor $urgent_bgcolor $urgent_bgcolor
+
+	include "$HOME/.cache/wal/colors-sway
+	# Sway Color PyWal settings
+	set $urgent #900000
+	set $urgent_txt #FFFFFF
+
+client.focused 			$color0 $background $foreground $color7 $background
+
+client.focused 		$color5 	$color5		$background 	$color5 	$color5
+client.focused_inactive	$background	$background	$foreground	$background	$background
+client.unfocused	$background	$background	$foreground	$background	$background
+client.urgent		$urgent		$urgent		$urgent		$urgent		$urgent	

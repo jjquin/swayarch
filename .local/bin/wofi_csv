@@ -32,7 +32,7 @@ rm $HOME/.cache/wofi-dmenu
 
 cat "$MAP" \
     | cut -d ',' -f 1 \
-    | wofi -d -p "$@ " --width 200 --height $HEIGHT\
+    | wofi -d -p "$@ " --width 300 --height $HEIGHT\
     | head -n 1 \
     | xargs -i --no-run-if-empty grep "{}" "$MAP" \
     | cut -d ',' -f 2 \

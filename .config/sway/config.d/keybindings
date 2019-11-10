@@ -139,6 +139,8 @@
 #
 	# %%$mod+w: Choose from running windows %%
 	bindsym $mod+w exec swytch
+	# %%$mod+shift+w: Change to random wallpaper
+	bindsym $mod+Shift+w exec random_wallpaper
 
 	# %%$mod+p: Act on last item copied to clipboard %%
 	#bindsym $mod+p exec clip-actions.sh
@@ -146,12 +148,12 @@
 	bindsym $mod+Shift+p exec clipman
 	
 	# %%$mod+s: Lock screen %%
-	bindsym $mod+s exec swaylock -f -i $HOME/.cache/wallpaper2.jpg
+	bindsym $mod+s exec lock off
 	# %%$mod+Shift+s: Lock and Suspend Thinkpad %%
 	bindsym $mod+Shift+s exec sudo systemctl suspend
 	
-	# %%$mod+d: Rofi Thinkpad menu %%
-	bindsym $mod+d exec wofi_csv ThinkPad
+	# %%$mod+Shift+d: Rofi Thinkpad menu %%
+	bindsym $mod+Shift+d exec wofi_csv ThinkPad
 	# %%$mod+o: xdg-open menu %%
 	bindsym $mod+o exec open
 	# %%$mod+x: Power Menu (Shutdown, Reboot, etc) %% 
@@ -203,8 +205,8 @@
 # 
 	# %%$mod+r: Launch default file manager %%
 	bindsym $mod+r exec spawn ranger terminal
-	# %%$mod+Shift+d: Dropdown terminal scratchpad %%
-	bindsym $mod+Shift+d exec spawn zsh dropdown
+	# %%$mod+d: Dropdown terminal scratchpad %%
+	bindsym $mod+d exec spawn zsh dropdown
 	# %%$mod+Return: Launch Kitty main terminal session %%
 	bindsym $mod+Return exec spawn Main_Terminal session
 	# %%$mod+Shift+Return: Launch a kitty terminal %%

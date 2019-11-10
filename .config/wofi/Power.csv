@@ -2,4 +2,5 @@ logout,"swaymsg exit"
 reboot,"sudo systemctl reboot"
 power off,"sudo systemctl poweroff"
 suspend,"sudo systemctl suspend"
-lock,"swaylock -f -i ~/.cache/wallpaper2.jpg
+Lock Screen Off,"lock off"
+lock,lock

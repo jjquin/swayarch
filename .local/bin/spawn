@@ -20,24 +20,20 @@
 app="$1"
 lookup="$1"
 execs="$1"
-echo "$apps $lookup $execs"
 
 if [ ! -z "$2" ]
 then
 	case $2 in
 		"session")
-			execs="kitty --title=\"$app\" --session=$HOME/.config/kitty/$app_session"
-			echo "$apps $lookup $execs"
+			execs="kitty --title=\"$app\" --session=\"$HOME/.config/kitty/$app"_session\"""
 			;;
 		"dropdown")
 			lookup="Dropdown $app"
 			execs="kitty --title=\"$lookup\" $app"
-			 echo "$apps $lookup $execs"
 			;;
 		"terminal")
 			lookup="$app - Kitty"
 			execs="kitty --title=\"$lookup\" $app" 
-			 echo "$apps $lookup $execs"
 			 ;;
 	esac
 fi
@@ -60,7 +56,6 @@ then
 		swaymsg [title="(?i)$app"] focus
 	fi
 else 
-	echo "$lookup not detected, launching"
 	swaymsg exec "$execs"
 	if [[ $lookup =~ "Dropdown $app" ]]
 	then

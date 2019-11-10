@@ -1,0 +1,19 @@
+font=DejaVu Sans 9
+# anchor=bottom-right
+width=350
+padding=10
+margin=10
+border-size=5
+default-timeout=10000
+
+# Only for desktop, ignored when no such output exists
+output=DP-4
+
+background-color=#231f20
+# background-color=#000000
+border-color=#009ddc
+text-color=#d9d8d8
+
+[urgency=high]
+border-color=#ee2e24
+ignore-timeout=1

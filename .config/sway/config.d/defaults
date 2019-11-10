@@ -15,13 +15,17 @@
 	seat * hide_cursor 6000
 	# Enable automatic workspace back and forth
 	workspace_auto_back_and_forth yes
+	# Drag and resize floating windows with $mod key
+	floating_modifier $mod normal
+	# Show marks on marked windows
+	show_marks yes
 #
 # Idle/Lock Configuration
 # 
 	# Lock after 5 min, displays off after 10 min, lock after suspend
 	exec swayidle -w \
-		timeout 300 'lock' \
+		timeout 300 'swaylock -f -i ~/.cache/wallpaper2.jpg' \
 		timeout 600 'swaymsg "output * dpms off"' \
 			resume 'swaymsg "output * dpms on"' \
-		before-sleep 'lock'
+		before-sleep 'swaylock -f -i ~/.cache/wallpaper2.jpg'
 

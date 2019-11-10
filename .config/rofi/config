@@ -1,3 +1,4 @@
+rofi.modi:		window,run,drun,ssh,emoji
 rofi.theme:		themes/appsmenu
 rofi.case-sensitive	false
 rofi.opacity		80

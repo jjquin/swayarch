@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#
+# touchpad_toggle
+# 
+# Desc: disables and enables the touchpad defined
+# in the TOUCHPAD variable.  Requires an argument
+# on or off.
+#
+
+
 TOUCHPAD="1739:0:Synaptics_TM3053-004"
 
 case $1 in

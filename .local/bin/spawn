@@ -1,21 +1,64 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
-# Starts Programs assign to KeyBindigs
-# If the program is already started it 
+#
+# spawn
+#
+# Desc: This script changes focus to a specific program if it is
+# running or launches it if it is not.  It also handles Kitty 
+# Sessions, Dropdown floating windows and terminal apps. 
+# Note the Dropdown apps must be terminal apps sinces that is what
+# I use.  A simple change to the dropdown change can fix it.
+#
+# Requirements:
+# Sway - for focus
+# Kitty - can easily change the terminal app except for the specific
+# kitty session option
+#
 
-[ -z "$2" ] && exit
+[ -z "$1" ] && exit
 
-program=$1
-mark=$2
-shift
+app="$1"
+lookup="$1"
+execs="$1"
+echo "$apps $lookup $execs"
 
-if  swaymsg -t get_tree | grep "$mark" 
+if [ ! -z "$2" ]
 then
-	echo "Window detected."
-	swaymsg [con_mark="$mark"] focus
-else
-	echo "Window not detected... spawning."
-	swaymsg exec "$program"
-	sleep 1
-	swaymsg mark $mark
+	case $2 in
+		"session")
+			execs="kitty --title=\"$app\" --session=$HOME/.config/kitty/$app_session"
+			echo "$apps $lookup $execs"
+			;;
+		"dropdown")
+			lookup="Dropdown $app"
+			execs="kitty --title=\"$lookup\" $app"
+			 echo "$apps $lookup $execs"
+			;;
+		"terminal")
+			lookup="$app - Kitty"
+			execs="kitty --title=\"$lookup\" $app" 
+			 echo "$apps $lookup $execs"
+			 ;;
+	esac
 fi
+
+
+results=$(swaymsg -t get_tree | grep "$lookup")
+
+
+if [[ $results =~ "\"app_id\": \"$lookup\"" ]]
+then 
+	echo "$lookup detected"
+	swaymsg [app_id="(?i)$app"] focus
+elif [[ $results =~ "$lookup" ]]
+then
+	echo "$lookup detected"
+	swaymsg [title="(?i)$app"] focus
+else 
+	echo "$lookup not detected, launching"
+	swaymsg exec "$execs"
+
+fi
+
+
+

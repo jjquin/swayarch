@@ -1,5 +1,0 @@
-#/bin/bash
-pac=$(checkupdates 2>/dev/null | wc -l)
-aur=$(yay -Qu 2>/dev/null | wc -l)
-
-echo "$pac  $aur"

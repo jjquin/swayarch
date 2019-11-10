@@ -1,5 +1,17 @@
 #!/bin/bash
 
+#
+# arch_updates
+#
+# Desc: Checks how many updates are available from the Arch 
+# and the Arch User Repository and displays the totla
+#
+# Requires:
+# pacman-contrib for checkupdates
+# yay
+#
+
+
 updates_arch=$(checkupdates 2>/dev/null | wc -l)
 
 if [ $? -eq 1 ]; then

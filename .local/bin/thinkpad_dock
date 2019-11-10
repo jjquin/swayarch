@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# 
+# thinkpad_dock
+#
+# Desc: Preliminary script to dock and undock my
+# ThinkPad.  Needs altering so it doesn't require
+# reloading Sway's configuration.  Looking into
+# Kanshi to handle display management.
+#
+# Requirements:
+# wifi_toggle script
+# toutchpad_toggle scripte
+#
+
 NODISPLAYS=$(echo $(swaymsg -t get_outputs | grep DP | wc -l ))
 DOCKSTATE=$1
 OUTPUTS_DIR="$HOME/.config/sway/outputs"

@@ -18,11 +18,11 @@
 	
 	# Application Launcher
 	#set $menu dmenu_path | dmenu | xargs swaymsg exec --
-	set $menu rofi -show drun -columns 2
+	set $menu wofi --show drun -f -i --width 350
 
 	# Screenshots
-	set $screenshot grim $HOME/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
-	set $screenclip slurp | grim -g - $HOME/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+	set $screenshot grim $HOME/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png | wl-copy
+	set $screenclip slurp | grim -g - $HOME/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png | wl-copy
 
 	# Workspaces
 	Set $ws1 1
@@ -34,6 +34,7 @@
 	Set $ws7 7
 	Set $ws8 8
 	Set $ws9 9
+	set $ws10 10
 
 	# Gaps
 	set $gapsin 5
@@ -49,40 +50,10 @@
 # 
 # Include other files
 #
-	#Get Wallpaper Names
-	exec_always random_wallpaper set
 	# Include current theme
 	include $HOME/.config/sway/themes/current
 	include $HOME/.config/sway/themes/theme_settings
-	# Include current outputs
-	include $HOME/.config/sway/outputs/current
 	# Include files from config.d directory
 	include $HOME/.config/sway/config.d/*
-	
-	
 
-#
-# Startup Programs
-#
-	# Dropdown Calculator
-	exec ddspawn Calculator
-	# Dropdown Terminal
-	exec ddspawn Terminal
-	# Start on workspace 4: Term
-	exec swaymsg workspace $ws4
-	# Start terminal
-	exec $TERMINAL
-	# Start mako - notifications
-	exec mako
-	# Run Kanshi
-	#exec_always bash -c "killall kanshi; kanshi"
 
-	# Waybar
-	exec_always waybar_launch
-
-	# Start redshift
-	exec redshift_toggle
-	# Start Bluetooth applet
-	exec blueman-applet
-	# Start Network Manager Applet
-	exec 'nm-applet --indicator'

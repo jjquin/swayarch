@@ -1,5 +1,13 @@
 #!/usr/bin/env sh
-# Syncs repositories and downloads updates, meant to be run as a cronjob.
+
+#
+# pacman_updates
+#
+# Desc: Syncs repositories and downloads updates, meant to be run as a cronjob.
+# From Luke Smith https://github.com/lukesmithxyz
+# 
+# Needs to be updated to also do updates from AUR
+#
 
 ping -q -c 1 1.1.1.1 > /dev/null || exit
 

@@ -1,0 +1,6 @@
+Dock ThinkPad T450,thinkpad_dock dock
+Undock ThinkPad T450, thinkpad_dock undock
+Mute/Unmute ThinkPad Microphone,thinkpad_microphone
+Mute/Unmute ThinkPad Audio,thinkpad_mute
+Enable/Disable ThinkPad TouchPad,thinkpad_touchpad
+Enable/Disable ThinkPad Wifi,wifi_toggle

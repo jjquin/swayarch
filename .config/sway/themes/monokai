@@ -1,4 +1,3 @@
-output * bg ~/Pictures/bg/blank.jpg fill
 
 font pango: Lato Light 11
 
@@ -31,38 +30,4 @@ set $menu_fgactive $focused_textcolor
 
 set $statuscolor #ffffff80
 set $statusbg #414339ff
-
-#
-# Appearance:
-#
-
-set $gaps_outer_on 0
-set $gaps_inner_on 48
-
-default_border normal 0
-gaps outer 0
-gaps inner 0
-
-client.focused $focused_bgcolor $focused_bgcolor $focused_textcolor $focused_indicator $focused_bgcolor
-client.focused_inactive $inactive_bgcolor $inactive_bgcolor $inactive_textcolor $inactive_indicator $inactive_bgcolor
-client.unfocused $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor $unfocused_indicator $unfocused_bgcolor
-client.urgent $urgent_bgcolor $urgent_bgcolor $urgent_textcolor $urgent_indicator $urgent_bgcolor
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    font pango: Lato Light 11
-    colors {
-        focused_statusline $statuscolor
-        statusline $statuscolor
-        background $statusbg
-        urgent_workspace $urgent_bgcolor $urgent_bgcolor $urgent_textcolor
-        focused_workspace $focused_bgcolor $focused_bgcolor $focused_textcolor
-        active_workspace $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor
-        inactive_workspace #00000000 #00000000 $inactive_textcolor
-    }
-}
 

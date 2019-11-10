@@ -1,0 +1,35 @@
+
+#window {
+margin: 5px;
+border: 2px ;
+}
+
+#input {
+margin: 5px;
+border: 2px ;
+}
+
+#inner-box {
+margin: 5px;
+border: 2px ;
+}
+
+#outer-box {
+margin: 5px;
+border: 2px ;
+}
+
+#scroll {
+margin: 5px;
+border: 2px ;
+}
+
+#text {
+margin: 5px;
+border: 2px ;
+}
+
+.entry {
+	padding: 10px;
+}
+

@@ -2,24 +2,15 @@
 #
 # Basic Keybindings:
 #
-	# Drag and resize floating windows with $mod key
-	floating_modifier $mod normal
-
 	# %%mod+q: Kill focused window %%
 	bindsym $mod+q kill
-	# %%mod+shift+q: Kill focused window with predjudice %%
-	bindsym $mod+Shift+q kill -9 'ydotool getwindowfocus getwindowpid'
+
+	# %%mod+Shift+r: Restart sway %%
+	bindsym $mod+Shift+r restart
 
 	# %%$mod+Shift+c: Reload Sway configuration %%
 	bindsym $mod+Shift+c reload
 
-	# %%$mod+x: Power Menu (Shutdown, Reboot, etc) %% 
-	bindsym $mod+x exec rofi_csv Power
-	
-	# %%$mod+g: Reset Gaps to default %%
-	bindsym $mod+g gaps inner $gapsin, gaps outer $gapsout
-	# %%$mod+Shift+g: Remove Gaps
-	bindsym $mod+Shift+g gaps inner 0, gaps outer 0
 
 #
 # Movement Keybindings:
@@ -67,6 +58,7 @@
 	bindsym $mod+7 workspace $ws7
 	bindsym $mod+8 workspace $ws8
 	bindsym $mod+9 workspace $ws9
+	bindsym $mod+0 workspace $ws10
 
 	# %%$mod+comma: Switch to previous workspace %%
 	bindsym $mod+comma workspace prev
@@ -85,41 +77,36 @@
 	bindsym $mod+Shift+7 move container to workspace $ws7, workspace $ws7
 	bindsym $mod+Shift+8 move container to workspace $ws8, workspace $ws8
 	bindsym $mod+Shift+9 move container to workspace $ws9, workspace $ws9
+	bindsym $mod+Shift+0 move container to workspace $ws9, workspace $ws10
 
 	# %%mod+Shift+comma: Move focused window to previous monitor %%
 	bindsym $mod+Shift+comma mark --add current; move container to output left; [con_mark="current"] focus; unmark current
 	# %%mod+Shift+period: Move focused window to next monitor %%
 	bindsym $mod+Shift+period mark --add current; move container to output right; [con_mark="current"] focus; unmark current
 	# %%mod+Shift+slash: Swap workspaces between two monitors %%
-	bindsym $mod+Shift+slash exec swap-workspaces
+	#bindsym $mod+Shift+slash exec swap-workspaces
 
 #
 # Layout stuff:
 #
-	# %%$mod+backslash: Change workspace layout to horizontal split %%
-	bindsym $mod+backslash splith
-	# %%$mod+Shift+backslash: Change workspace layout to vertical split %%
-	bindsym $mod+Shift+backslash splitv
-
 	# %%$mod+Tab: Toggle layout between tabbed and split %%
 	bindsym $mod+Tab layout toggle tabbed split
+	# %%$mod+Shift+Tab: Toggle between vertical and horizontal split modes
+	bindsym $mod+Shift+Tab split toggle
 
 	# %%$mod+Shift+f: Make focused window fullscreen %%
 	bindsym $mod+Shift+f fullscreen
 
+	# %%$mod+g: Reset Gaps to default %%
+	bindsym $mod+g gaps inner all set $gapsin, gaps outer all set $gapsout
+	# %%$mod+Shift+g: Remove Gaps
+	bindsym $mod+Shift+g gaps inner all set 0, gaps outer all set 0
+	
 	# %%$mod+t: Toggle focused window between tiled and floating %%
-	bindsym $mod+t floating toggle
+	bindsym $mod+grave floating toggle
 
 	# %%$mod+Shift+t: Swap focus between tiling and floating areas %%
-	bindsym $mod+Shift+t focus mode_toggle
-
-#
-# Scratchpad
-#
-	# %%$mod+c: Dropdown calculator scratchpad %%
-	bindsym $mod+c exec ddspawn Calculator
-	# %%$mod+Shift+Return: Dropdown terminal scratchpad %%
-	bindsym $mod+Shift+Return exec ddspawn Terminal
+	bindsym $mod+Shift+grave focus mode_toggle
 
 #
 # Resizing Containers:
@@ -127,10 +114,11 @@
 	mode "resize" {
     		# left will shrink the containers width
     		# right will grow the containers width
-    		# up will shrink the containers height    # down will grow the containers height
+    		# down will shrink the containers height    
+		# up will grow the containers height
     		bindsym $left resize shrink width 10px
-    		bindsym $down resize grow height 10px
-    		bindsym $up resize shrink height 10px
+    		bindsym $down resize shrink height 10px
+    		bindsym $up resize grow height 10px
     		bindsym $right resize grow width 10px
 
     		# Ditto, with arrow keys
@@ -143,99 +131,147 @@
     		bindsym Return mode "default"    
 		bindsym Escape mode "default"
 	}		
-	# %%$mod+r: Resize focused window %%
-	bindsym $mod+r mode "resize"
+	# %%$mod+Shift+z: Resize focused window %%
+	bindsym $mod+Shift+z mode "resize"
+
+#
+# Menu & Custom Application Keybindings
+#
+	# %%$mod+w: Choose from running windows %%
+	bindsym $mod+w exec swytch
+
+	# %%$mod+p: Act on last item copied to clipboard %%
+	#bindsym $mod+p exec clip-actions.sh
+	# %%$mod+Shift+p: View Clipboard History %%
+	bindsym $mod+Shift+p exec clipman
+	
+	# %%$mod+s: Lock screen %%
+	bindsym $mod+s exec swaylock -f -i $HOME/.cache/wallpaper2.jpg
+	# %%$mod+Shift+s: Lock and Suspend Thinkpad %%
+	bindsym $mod+Shift+s exec sudo systemctl suspend
+	
+	# %%$mod+d: Rofi Thinkpad menu %%
+	bindsym $mod+d exec wofi_csv ThinkPad
+	# %%$mod+o: xdg-open menu %%
+	bindsym $mod+o exec open
+	# %%$mod+x: Power Menu (Shutdown, Reboot, etc) %% 
+	bindsym $mod+x exec wofi_csv Power
+
+	# %%$mod+Space: Menu Launcher %%
+	bindsym $mod+Space exec $menu
+	# %%$mod+Shift+Space: Choose from Alt Menus %%
+	bindsym $mod+Shift+Space exec wofi_csv Menus
+
+	# %%$mod+Print: Screenshot screen %%
+	bindsym $mod+Print exec $screenshot
+	# %%$mod+Shift+Print: Screenshot area %%
+	bindsym $mod+Shift+Print exec $screenclip
 
 #
 # Application Keybindings
-#
-	# %%$mod+Space: Rofi Menu Launcher %%
-	bindsym $mod+Space exec $menu
-	bindsym Menu exec $menu
-	# %%$mod+Return: Launch default terminal %%
-	bindsym $mod+Return exec $TERMINAL
-	# %%$mod+w: Launch default web browser %%
-	bindsym $mod+w exec spawn $BROWSER wwwbrowser
-	# %%$mod+Shift+w launch secondary web browser %%
-	bindsym $mod+Shift+w exec spawn qutebrowser vimbrowser
-	# %%$mod+f: Launch default file manager %%
-	bindsym $mod+f exec termspawn $FILE fileranger
-	# %%$mod+p: Rofi Bitwarden menu %%
-	bindsym $mod+p exec bwmenu -- -columns 2
-	# %%$mod+Shift+p: Launch Bitwarden %%
-	bindsym $mod+Shift+p exec spawn bitwarden passmanager
-	# %%$mod+y: View Clipboard History %%
-	bindsym $mod+y exec clipman
-	# %%$mod+Shift+y: Act on last item copied to clipboard %%
-	#bindsym $mod+Shift+y exec clip-actions.sh
-	# %%$mod+semicolon: Emergency Key %%
-	#bindsym $mod+semicolon exec emergency-hide
-	# %%$mod+s: Lock screen %%
-	bindsym $mod+s exec lock
-	# %%$mod+Shift+s: Lock and Suspend Thinkpad %%
-	bindsym $mod+Shift+s exec sudo systemctl suspend
-	# %%$mod+d: Rofi Thinkpad menu %%
-	bindsym $mod+d exec rofi_csv ThinkPad
-	# %%$mod+n: Launch Network Manager Configuration %%
-	bindsym $mod+n exec termspawn nmtui networknmtui
-	# %%$mod+Shift+n: Launch GUI Network Connection Editor %%
-	bindsym $mod+Shift+n exec spawn nm-connection-editor networkmanedit
-	# %%$mod+e: Launchy Thunderbird %%
-	bindsym $mod+e exec spawn thunderbird emailtbird
+# 
+	# %%$mod+Shift+q launch qutebrowser %%
+	bindsym $mod+Shift+q exec spawn qutebrowser
+	# %%$mod+f: Launch firefox %%
+	bindsym $mod+f exec spawn firefox
+	# %%$mod+y: Launch Syncthing %%
+	#bindsym+y: exec spawn syncthing
+	# %%$mod+t: Launchy Thunderbird %%
+	bindsym $mod+t exec spawn thunderbird 
+	# %%$mod+n: Launch GUI Network Connection Editor %%
+	bindsym $mod+n exec spawn nm-connection-editor 
+	# %%$mod+e: Launch emacs %%
+	bindsym $mod+e exec spawn emacs
+	# %%$mod+i: Launch IMV %%
+	bindsym $mod+i exec spawn imv
+	# %%$mod+Shift+i: Launch GIMP %%
+	bindsym $mod+Shift+i exec spawn gimp
 	# %%$mod+z: Luanch PDF Viewer Zathura %%
-	bindsym $mod+z exec spawn zathura pdfview
+	bindsym $mod+z exec spawn zathura
 	# %%$mod+v: Launch MPV Video Player %%
-	bindsym $mod+v exec spawn mpv mplayervideo
+	bindsym $mod+v exec spawn mpv 
 	# %%$mod+Shift+v: Launch VLC Video Player %%
-	bindsym $mod+Shift+v exec spawn vlc videolanplayer
+	bindsym $mod+Shift+v exec spawn vlc 
 	# %%$mod+b: Launch Calibre eBook Manager %%
-	bindsym $mod+b exec spawn calibre bookmanager
-	# %%$mod+Shift+b: Launch Bluetooth configuration %%
-	#bindsym $mod+Shift+b exec bluez
+	bindsym $mod+b exec spawn calibre 
 	# %%$mod+m: Launch Lollypop Music Player
-	bindsym $mod+m exec spawn lollypop lolmusicplayer
-	# %%$mod+Shift+m: Rofi Music Control Menu %%
-	bindsym $mod+Shift+m exec rofi-mpc
-	# %%$mod+Print: Screenshot screen
-	bindsym $mod+Print exec $screenshot
-	# %%$mod+Shift+Print: Screenshot area
-	bindsym $mod+Shift+Print exec $screenclip
+	bindsym $mod+m exec spawn lollypop
+
+
+#
+# Terminal Application Keybindings
+# 
+	# %%$mod+r: Launch default file manager %%
+	bindsym $mod+r exec spawn ranger terminal
+	# %%$mod+Shift+d: Dropdown terminal scratchpad %%
+	bindsym $mod+Shift+d exec spawn zsh dropdown
+	# %%$mod+Return: Launch Kitty main terminal session %%
+	bindsym $mod+Return exec spawn Main_Terminal session
+	# %%$mod+Shift+Return: Launch a kitty terminal %%
+	bindsym $mod+Shift+Return exec $TERMINAL
+	# %%$mod+Shift+n: Launch Network Manager Configuration %%
+	bindsym $mod+Shift+n exec spawn nmtui terminal
+	# %%$mod+c: Dropdown calculator scratchpad %%
+	bindsym $mod+c exec spawn bc dropdown
+	# %%$mod+Shift+b: Launch Bluetooth configuration %%
+	bindsym $mod+Shift+b exec bluetoothctl terminal
 
 #
 # Media Keybindings
 #
-	# Lower Volume small
+	# %%$mod+minus: Lower volume 5% %%
+	bindsym $mod+minus exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+	# %%$mod+Shift+minus: Lower volume 20% %%
+	bindsym $mod+Shift+minus exec pactl set-sink-volume @DEFAULT_SINK@ -20%
+	# %%$mod+equal: Raise volume 5% %%
+	bindsym $mod+equal exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+	# %%$mod+Shift+equal: Raise volume 20% %%
+	bindsym $mod+Shift+equal exec pactl set-sink-volume @DEFAULT_SINK@ +20%
+	# %%$mod+semicolon: Emergency Key %%
+	#bindsym $mod+semicolon exec emergency-hide
+	# %%$mod+Shift+semicolon: Toggle mute volume %%
+	bindsym $mod+Shift+semicolon exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+	# %%$mod+bracketleft: Back to previous song/video %%
+	bindsym $mod+bracketleft exec playerctl prevous
+	# %%$mod+bracketright: Skip to next song/video %%
+	bindsym $mod+bracketright exec playerctl next
+	# %%$mod+Shift+bracketleft: Skip backward 10 seconds in song/video %%
+	bindsym $mod+Shift+bracketleft exec playerctl position 10 +
+	# %%$mod+Shift+bracketright: Skip forward 10 seconds in song/video %%
+	bindsym $mod+Shift+bracketright exec playerctl position 10 -
+	# %%$mod+Shift+m: play/pause song/video %%
+	bindsym $mod+Shift+m exec playerctl play-pause
 	
 #
 # Extra XF86 Keys
 #
 	# ThinkPad Special Keys
-# 	bindsym XF86AudioMute exec $mute
-# 	bindsym XF86AudioLowerVolume exec $audio_lower
-# 	bindsym XF86AudioRaiseVolume exec $audio_raise
-# 	bindsym XF86AudioMicMute exec mic_toggle
+ 	bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+ 	bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+ 	bindsym XF86AudioRaiseVolume exec  pactl set-sink-volume @DEFAULT_SINK@ +5%
+ 	bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
  	bindsym XF86MonBrightnessDown exec light -A 10
  	bindsym XF86MonBrightnessUP exec light -U 10
-# 	bindsym XF86Display exec $display_settings
-# 	bindsym XF86WLAN exec wifi_toggle
+ 	bindsym XF86Display exec wdisplays
+ 	bindsym XF86WLAN exec wifi_toggle
 # 	bindsym XF86Tools exec webcam_toggle
-# 	bindsym XF86Search exec web_search
-# 	bindsym xF86LaunchA exec $menu
-# 	bindsym XF86Explorer exec termspawn $FILE fileranger
+ 	bindsym XF86Search exec web_search
+ 	bindsym xF86LaunchA exec $menu
+ 	bindsym XF86Explorer exec spawn $FILE terminal
 # 	
 # 	# Microsoft Natural Keyboard 4000 Special Keys
-# 	bindsym XF86HomePage exec spawn $BROWSER wwwbrowser
-# 	bindsym XF86Mail exec spawn thunderbird emailtbird
+ 	bindsym XF86HomePage exec spawn $BROWSER
+ 	bindsym XF86Mail exec spawn thunderbird 
 # 	#bindsym XF86Launch5
 # 	#bindsym XF86Launch6
 # 	#bindsym XF86Launch7
 # 	#bindsym XF86Launch8
 # 	#bindsym XF86Launch9
-# 	bindsym XF86Favorites exec spawn qutebrowser vimbrowser
-# 	bindsym XF86AudioPlay exec $audio_play
-# 	bindsym XF86Calculator ddspawn Calculator
-# 	bindsym XF86Back workspace prev
-# 	bindsym XF86Forward workspace next
+ 	bindsym XF86Favorites exec spawn qutebrowser 
+ 	bindsym XF86AudioPlay exec playerctl play-pause
+ 	bindsym XF86Calculator spawn bc dropdown
+ 	bindsym XF86Back workspace prev
+ 	bindsym XF86Forward workspace next
 
 #
 # ThinkPad Lidswitch

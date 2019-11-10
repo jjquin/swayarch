@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#
+# redshift_toggle
+# 
+# Desc: toggles redshift
+# Copied from someone's dotfiles
+#
+# requires redshift-wlr-gamma-control-git from AUR
+# to work on Sway
+#
+
 RSFILE=${RSFILE:-/tmp/rsFile}
 
 if [ -e $RSFILE ]; then

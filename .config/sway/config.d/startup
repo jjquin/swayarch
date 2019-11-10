@@ -1,0 +1,26 @@
+
+#
+# Startup Programs
+#
+        # # Start on workspace 4: Term
+        exec swaymsg workspace $ws4
+        # # Start terminal
+        exec kitty --title=Main_Terminal --session=$HOME/.config/kitty/Main_Terminal_session
+        # # Start mako - notifications
+        exec mako
+        # # Run Kanshi
+        # #exec_always bash -c "killall kanshi; kanshi"
+        # # Run polkit gnome
+        # # exec /usr/lib/polkit-gnome-authentication-agent-1
+
+        # # Waybar
+        exec waybar_launch
+
+        # # Start redshift
+        exec redshift-gtk -c ~/.config/redshift/redshift.conf 
+        # # Start Bluetooth applet
+        exec blueman-applet
+
+        # #Set Random Wallpaper
+        exec_always random_wallpaper
+

@@ -1,6 +1,5 @@
-output * bg ~/Pictures/bg/1980.jpg fill
 
-set $font Radis Sans 13
+set $font DejaVu Sans 12
 
 font pango: $font
 
@@ -30,36 +29,3 @@ set $urgent_textcolor #f8f8f2c0
 set $urgent_indicator #f83333c0
 
 set $statuscolor #00ffd0c0
-
-#
-# Appearance:
-#
-
-default_border normal 3
-gaps outer 0
-gaps inner 48
-
-
-client.focused $focused_bgcolor $focused_bgcolor $focused_textcolor $focused_indicator $focused_bgcolor
-client.focused_inactive $inactive_bgcolor $inactive_bgcolor $inactive_textcolor $inactive_indicator $inactive_bgcolor
-client.unfocused $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor $unfocused_indicator $unfocused_bgcolor
-client.urgent $urgent_bgcolor $urgent_bgcolor $urgent_textcolor $urgent_indicator $urgent_bgcolor
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    font pango: $font
-    colors {
-        focused_statusline $statuscolor
-        statusline $statuscolor
-        background #32323200
-        urgent_workspace $urgent_bgcolor $urgent_bgcolor $urgent_textcolor
-        focused_workspace $focused_bgcolor $focused_bgcolor $focused_textcolor
-        active_workspace $unfocused_bgcolor $unfocused_bgcolor $unfocused_textcolor
-        inactive_workspace #00000000 #00000000 $inactive_textcolor
-    }
-}
-

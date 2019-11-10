@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#
+# waybar_launch
+#
+# Desc: kills and restarts waybar
+#
+
 kill -9 `pidof waybar`
 
 # Wait until the processes have been shut down

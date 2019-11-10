@@ -1,0 +1,7 @@
+layout tall
+cd ~
+launch zsh
+new_tab Ranger
+launch ranger
+
+

@@ -10,10 +10,11 @@
 	}	
 
 	# Keyboard
-	input * xkb_layout "us"
-	#input * xkb_variant "colemak"
-	input * xkb_options "caps:backspace"
-	input "MANUFACTURER1 Keyboard" xkb_model "microsoft4000"
-	input * xkb_numlock enable
+	input * {
+		xkb_layout us,us(colemak)
+		# xkb_options caps:backspace,grp:alts_toggle,grp_led:scroll,altwin:menu_win,shift:both_capslock_cancel
+		xkb_options caps:backspace
+		xkb_numlock enable 
+	}
 
 

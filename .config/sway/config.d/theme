@@ -54,3 +54,8 @@
 	    	gtk-theme:gtk-theme-name \
 	    	icon-theme:gtk-icon-theme-name \
 	    	cursor-theme:gtk-cursor-theme-name
+
+#
+# Start Flash Focus
+#
+	exec_always flashfocus

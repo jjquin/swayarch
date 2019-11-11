@@ -6,11 +6,11 @@
 # Default workspaces for common programs
 #
 	# Workspace 1 - Web
-	assign [app_id="^firefox$|qutebrowser|brave"] $ws1
+	assign [app_id="(^firefox$|qutebrowser|brave)"] $ws1
 	# Workspace 2 - Email
 	assign [app_id="^thunderbird$"] $ws2
 	# Workspace 3 - Chat/IRC
-	assign [app_id="telegram|TelegramDesktop"] $ws3
+	assign [app_id="(telegram|TelegramDesktop)"] $ws3
 	# Workspace 4 - Terminal
 	assign [title="Main_Terminal"] $ws4
 	# Workspace 5 - Editor
@@ -21,13 +21,13 @@
 	assign [app_id="mpv"] $ws7
 	assign [title="VLC media player"] $ws7
 	# Workspace 8 - Audio
-	assign [app_id="lollypop|mumble"] $ws8
+	assign [app_id="(lollypop|mumble)"] $ws8
 	# Workspace 9 - Images
 	assign [app_id="gimp"] $ws9
 	assign [title="GIMP Startup"] $ws9
 	# Workspace 10 - Books
 	assign [app_id="calibre"] $ws10
-	assign [app_id="(?i)foliate|(?i)fbreader"] $ws10
+	assign [app_id="((?i)foliate|(?i)fbreader)"] $ws10
 
 
 	# Auto float apps
@@ -48,12 +48,13 @@
 	for_window [app_id="gnome-(calendar|calculator|power-statistics|control-center)"] floating enable
 	for_window [app_id="org.gnome.(Nautilus|Weather)"] floating enable
 	for_window [app_id="(pavucontrol|psensor)"] floating enable
+	for_window [app_id="soffice"] floating enable
 	for_window [title="^Open File$"] floating enable
 	for_window [title="Weather report: 44240 - qutebrowser"] floating enable
 	for_window [title="nmtui - Kitty"] floating enable
 	for_window [title="Update Check|Cryptomator"] floating enable, resize set 800 600
 	for_window [window_role="GtkFileChooserDialog"] resize set 800 600
-	for_window [window_role="GtkFileChooserDialog"] move position center
+	for_window [window_role="GtkFiileChooserDialog"] move position center
 	
 	# default floating
 	for_window [window_role="pop-up"] floating enable

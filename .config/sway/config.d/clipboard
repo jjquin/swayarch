@@ -11,11 +11,10 @@
 
 	# Start clipman clipboard manager
 	exec_always wl-paste -t text --watch clipman store 1>> ~/.cache/clipman.log 2>&1
-	exec_always wl-paste -p -t text --watch clipman store --histpath="~/.local/share/clipman-primary.json
+	exec_always wl-paste -p -t text --watch clipman store --histpath="~/.local/share/clipman-primary.json"
 
 #
 # Clipboard Keybindings
 #
-	# $mod+p: Paste last item in clipboard
-	bindsym $mod+p exec wl-copy -n
-	bindsym $mod+Shift+p exec clipman pick --tool=wofi
+	# $mod+p: Choose from clipboard history
+	bindsym $mod+p exec clipman pick --tool=wofi --histpath="~/.local/share/clipman-primary.json"

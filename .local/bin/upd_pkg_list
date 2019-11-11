@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# upd_pkg_list
+# From: samerickson http://github.com/samerickson/dotfiles
+#
+# Desc: updates the package lists so Arch Linuc can be reinstalled
+#
+# pkgs-pacman.txt: all user installed applications from pacman
+# pkgs-aur.txt:    all user installed applications from AUR
+# packages.txst:   all packages installed on the system
+#
+# Requirements:
+# pacman
+#
+
+location="$HOME/.config"
+
+pacman -Qett | grep -v "$(pacman -Qem)" > $location/pkgs-pacman.txt
+pacman -Qqm > $location/pkgs-aur.txt
+pacman -Q > $location/packages.txt

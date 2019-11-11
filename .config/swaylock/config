@@ -1,0 +1,43 @@
+##############################################################
+#             Krathalan's swaylock config/theme              #
+#         Homepage: https://gitlab.com/krathalan/dots        #
+#        Copyright (C) 2019 krathalan; License: GPLv3        #
+##############################################################
+
+########## Appearance ##########
+
+# Indicator
+indicator-caps-lock
+indicator-radius=100
+indicator-thickness=15
+
+# Highlight colors
+bs-hl-color=b3001bff
+caps-lock-bs-hl-color=b3001bff
+caps-lock-key-hl-color=00ff96ff
+key-hl-color=00ff96ff
+
+# Inside colors
+inside-color=00000000
+inside-caps-lock-color=00000077
+inside-clear-color=00000077
+inside-ver-color=00000077
+inside-wrong-color=00000077
+
+# Ring colors
+ring-color=00cc77aa
+ring-caps-lock-color=fff569aa
+ring-clear-color=eeeeeeff
+ring-ver-color=1a8cffff
+ring-wrong-color=dd2241ff
+
+# Text
+font="ibm plex mono"
+text-clear-color=ffffffff
+text-caps-lock-color=ffffffff
+text-ver-color=ffffffff
+text-wrong-color=ffffffff
+
+# Miscellaneous
+ignore-empty-password
+

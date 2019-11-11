@@ -1,5 +1,5 @@
 width=800
 height=400
 mode=run
-colors=colors
+colors=/home/jj/.cache/colors
 filter_rate=100

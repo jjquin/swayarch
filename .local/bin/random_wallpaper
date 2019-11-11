@@ -31,7 +31,8 @@ count=1
 for OUTPUT in $DISPLAYS
 do
 	WALLPAPER=$CACHE_DIR/wallpaper$count.jpg
-	cp $WALLPAPER_DIR/$(ls $WALLPAPER_DIR | shuf -n 1) $WALLPAPER
+	ln -fs $WALLPAPER_DIR/$(ls $WALLPAPER_DIR | shuf -n 1) $WALLPAPER
+
 	swaymsg exec "swaybg -o $OUTPUT -i $WALLPAPER -m fill"
 	count=$((count + 1))
 done

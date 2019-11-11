@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# -----------------------------------------------------------------------------
+# Info:
+#   author:    Miroslav Vidovic
+#   file:      web-search.sh
+#   created:   24.02.2017.-08:59:54
+#   revision:  ---
+#   version:   1.0
+# -----------------------------------------------------------------------------
+# Requirements:
+#   rofi
+# Description:
+#   Use rofi to search the web.
+# Usage:
+#   web-search.sh
+# -----------------------------------------------------------------------------
+# Script:
+
+
+# searx="https://search.privacytools.io/?q="
+searx="https://search.privacytools.io/?preferences=eJx9VU1v2zAM_TXzJUixrYedfBjWwwoMaLGmuwq0xDicJdGT5CTerx-V-LPLdjEgio98jyLpgLGzKSr2yuNJJajKXeiwMEwqYGR7xFBGTdtDV92lU2HB1x3UWKLfvr4UljXYfCgMRagsGtXariYfyx_ktpYaVAdODfaxICc41QY-99cc0CXW7FqLCcuYIKRWPIoIe4wIQR_K90U6oMOSo4ZQoF9neGrRZ5IiQFnyzaSiCnyKGLKa-O7jl0e_J08JVdSBrRXL193u-UWgpyBmOe8C6EYAr9-_idWxiBbrC9q9EjAHB4nYx4stE8uJNCSsOfQqokWd5O7C57PWGKN6eHoc48-lQS-8MZYN6QbESe3JYo56ZEhKRdYEduPQEIgx1-B851AuNKHXmWhAY-h_rpci55APnRE2qkaPAbJm3wMo5bpIWk411cIJYlq6zGFGYrPllhel1dFBK-dJ3JEMcg5SM9cWN62FfnPJP9PowRs8L6OPCmdLjdgkchiHhK538kSh36QAPlp5BrNyX2SDto23xEiTZAPoOnK3YEoe_sWbj4RLUR_Oi2IvajAIM1RXaeE-ppogo2EkN-qeHIYI4z1KT9MtoVfAAriHwDxptFQFkGJlXKS4DKC13qbjkqS0Nh0l5MptZDpKqyhVnYxLGt6jh0PONwP2QYaRQC84XbmunK4sb7XVm-bG1Dv2MuArPLTNxlEIHAYaiZueE8cDN-BntgcQ_fkzuF3HYJK8D-Ag1whX9zdedoKwjHnAlheddQWNpzdMJuDwoiOzN25zl_724FaV0eDDJqbQ6dSF_NZ_L4Thta97U7PBTf4Mmj7c3386LxubkoVquDSm3hi8bMi845aJp1G-UJ7277jGHP-U0VwCfp3Az7NbOEwHNuXz08uuGNalDFE5Xl-2-jamXv4glmvKjI9bA6H5A7veeM8=&q="
+
+
+query=$( wofi -d -p "Search: " -W 600 -H 100 -k ~/.cache/wofi-web)
+
+if [[ -n "$query" ]]; then
+  url="$searx$query"
+  xdg-open "$url"
+else
+  exit
+fi
+
+
+
+exit 0

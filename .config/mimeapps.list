@@ -1,4 +1,12 @@
 [Default Applications]
+x-scheme-handler/magnet=torrent.desktop;
+text/plain=text.desktop;
+text/x-shellscript=text.desktop;
+application/postscript=pdf.desktop;
+application/pdf=pdf.desktop;
+image/png=imv.desktop;
+image/jpeg=imv.desktop;
+image/gif=imv.desktop;
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/ftp=firefox.desktop

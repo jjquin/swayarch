@@ -5,7 +5,7 @@
 
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/spotify", "custom/weather", "custom/storage", "custom/pkg_no", "backlight", "pulseaudio", "network", "idle_inhibitor", "battery", "tray", "clock"],
+    "modules-right": ["custom/weather", "custom/storage", "custom/battery", "temperature", "network", "pulseaudio", "custom/pkg_no", "backlight", "idle_inhibitor", "tray", "clock"],
     "sway/mode": {
         "format": " {}"
     },
@@ -36,6 +36,14 @@
         "format": "{:%a %b %d %_I:%M %p}",
         "tooltip": false
     },
+    "custom/battery": {
+    	"interval": 8,
+    	"tooltip": false,
+    	"format": "{percentage}% {}{icon}",
+    	"format-icons": ["", "", "", "", "", "", ""],
+    	"return-type": "json",
+    	"exec": "$HOME/.config/waybar/modules/wbm_battery"
+    },
     "battery": {
         "format": "{capacity}% {icon}",
         "format-alt": "{time} {icon}",
@@ -54,10 +62,10 @@
         "format-alt-click": "click-right",
         "format-icons": {
             "wifi": ["", "" ,""],
-            "ethernet": [""],
-            "disconnected": [""]
+            "ethernet": [""],
+            "disconnected": [""]
         },
-        "on-click": "termite -e nmtui",
+        "on-click": "kitty nmtui",
     "tooltip": false
     },
     "pulseaudio": {

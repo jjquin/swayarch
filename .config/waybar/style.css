@@ -40,9 +40,14 @@ window#waybar.solo {
     color:      rgba(238, 46, 36, 1);
 }
 
-#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-pkg_no, #custom-spotify, #custom-weather, #custom-mail, #tray {
+#mode, #custom-battery, #temperature, #cpu, #memory, #network, #custom-storage, #custom-spotify, #custom-weather {
     margin:     0px 6px 0px 10px;
     min-width:  16px;
+}
+
+#mode, #pulseaudio, #idle_inhibitor, #backlight, #custom-pkg_no, #custom-mail, #tray {
+    margin:     0px 5px 0px 5px;
+    min-width:  10px;
 }
 
 #clock {

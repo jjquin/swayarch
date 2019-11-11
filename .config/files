@@ -1,0 +1,10 @@
+
+bf	~/.config/files
+bd	~/.config/directories
+cfz	~/.config/zsh/.zshrc
+cfa	~/.config/zsh/aliasrc
+cfv	~/.config/nvim/init.vim
+cfk	~/.config/kitty/kitty.conf
+cfr	~/.config/ranger/rc/conf
+cfs	~/.config/sway/config
+cfw	~/.config/newsboat/config

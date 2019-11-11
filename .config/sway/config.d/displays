@@ -1,0 +1,29 @@
+#
+# Sway Diplay Configuration
+#
+
+#
+# Set variables
+#
+	# Random wallpaper script
+	set $random_wall random_wallpaper
+	# Kanshi launch
+	set $kanshi bash -c "killall kanshi; kanshi"
+
+#
+# Setup displays and wallpaper
+#
+	# Enable Displays using Kanshi
+	exec_always $kanshi 
+
+        #Set Random Wallpaper
+        exec $random_wall
+
+#
+# Keybindings 
+#
+        # $mod+shift+w: Change to random wallpaper
+        bindsym $mod+Shift+w exec random_wallpaper
+	# XF86 key for switching displays
+	bindsym XF86Display exec $kanshi
+

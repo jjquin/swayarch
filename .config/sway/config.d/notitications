@@ -1,0 +1,5 @@
+#
+# Sway Notificaitons Setup
+#
+	# Start mako - notifications
+        exec mako

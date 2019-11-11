@@ -5,54 +5,14 @@
 #
 
 #
-### Variables:
+# Set Mod variables
 #
 	# Super key = mod key
 	set $mod Mod4
 	
-	# Movement keys - colemak layout
-	set $left j
-	set $right l
-	set $up h
-	set $down k
-	
-	# Application Launcher
-	#set $menu dmenu_path | dmenu | xargs swaymsg exec --
-	set $menu wofi --show drun -f -i --width 350
-
-	# Screenshots
-	set $screenshot grim $HOME/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png | wl-copy
-	set $screenclip slurp | grim -g - $HOME/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png | wl-copy
-
-	# Workspaces
-	Set $ws1 1
-	Set $ws2 2
-	Set $ws3 3
-	Set $ws4 4
-	Set $ws5 5
-	Set $ws6 6
-	Set $ws7 7
-	Set $ws8 8
-	Set $ws9 9
-	set $ws10 10
-
-	# Gaps
-	set $gapsin 5
-	set $gapsout 5
-
-	# Colors
-	set $cl_high #009ddc
-	set $cl_indi #d9d8d8
-	set $cl_back #231f20
-	set $cl_fore #d9d8d8
-	set $cl_urge #ee2e24
-
-# 
-# Include other files
 #
-	# Include current theme
-	include $HOME/.config/sway/themes/current
-	include $HOME/.config/sway/themes/theme_settings
+# Include files in config.d directory
+#
 	# Include files from config.d directory
 	include $HOME/.config/sway/config.d/*
 

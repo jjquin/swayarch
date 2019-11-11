@@ -1,0 +1,130 @@
+#
+# Sway Keybinding settings 
+#
+
+#
+# Set Variables
+#
+        # Application Launcher
+        set $menu wofi --show drun -f -i --width 350
+	# Menu Script
+	set $altmenu wofi_csv
+	# Application spawner
+	set $spawn spawn
+
+#
+# Custom Keybindings
+#
+	# mod+q: Kill focused window 
+	bindsym $mod+q kill
+
+	# mod+Shift+r: Restart sway 
+	bindsym $mod+Shift+r restart
+
+	# $mod+Shift+c: Reload Sway configuration 
+	bindsym $mod+Shift+c reload
+
+	# XF86 keys for brightness
+ 	bindsym XF86MonBrightnessDown exec light -A 10
+ 	bindsym XF86MonBrightnessUP exec light -U 10
+
+	# XF86 key for toggling wifi
+ 	bindsym XF86WLAN exec wifi_toggle
+	# XF86 key for toggling webcam
+ 	bindsym XF86Tools exec webcam_toggle
+
+#
+# Menu Keybindings
+#
+	# $mod+w: Choose from running windows 
+	bindsym $mod+w exec swytch
+
+	# $mod+Shift+d: Rofi Thinkpad menu 
+	bindsym $mod+Shift+d exec $altmenu ThinkPad
+	
+	# $mod+o: xdg-open menu 
+	bindsym $mod+o exec open
+	
+	# $mod+x: Power Menu (Shutdown, Reboot, etc)  
+	bindsym $mod+x exec $altmenu Power
+
+	# $mod+Space: Menu Launcher 
+	bindsym $mod+Space exec $menu
+	# $mod+Shift+Space: Choose from Alt Menus 
+	bindsym $mod+Shift+Space exec $altmenu Menus
+
+ 	# XF86 Menu key
+	bindsym xF86LaunchA exec $menu
+
+ 	# XF86 search key
+	bindsym XF86Search exec web_search
+
+#
+# Application Keybindings
+# 
+	# $mod+Shift+q launch qutebrowser 
+	bindsym $mod+Shift+q exec $spawn qutebrowser
+	# $mod+f: Launch firefox 
+	bindsym $mod+f exec $spawn firefox
+	# $mod+y: Launch Syncthing 
+	bindsym $mod+y exec $spawn syncthing
+	# $mod+t: Launchy Thunderbird 
+	bindsym $mod+t exec $spawn thunderbird 
+	# $mod+n: Launch GUI Network Connection Editor 
+	bindsym $mod+n exec $spawn nm-connection-editor 
+	# $mod+e: Launch emacs 
+	bindsym $mod+e exec $spawn emacs
+	# $mod+i: Launch IMV 
+	bindsym $mod+i exec $spawn imv
+	# $mod+Shift+i: Launch GIMP 
+	bindsym $mod+Shift+i exec $spawn gimp
+	# $mod+z: Luanch PDF Viewer Zathura 
+	bindsym $mod+z exec $spawn zathura
+	# $mod+v: Launch MPV Video Player 
+	bindsym $mod+v exec $spawn mpv 
+	# $mod+Shift+v: Launch VLC Video Player 
+	bindsym $mod+Shift+v exec $spawn vlc 
+	# $mod+b: Launch Calibre eBook Manager 
+	bindsym $mod+b exec $spawn calibre 
+	# $mod+m: Launch Lollypop Music Player
+	bindsym $mod+m exec $spawn lollypop
+
+	# XF86 web browser/home key
+ 	bindsym XF86HomePage exec spawn $BROWSER
+	# XF86 email/key
+ 	bindsym XF86Mail exec spawn thunderbird 
+ 	# XF86 favorites key
+	bindsym XF86Favorites exec spawn qutebrowser 
+
+
+#
+# Terminal Application Keybindings
+# 
+	# $mod+r: Launch default file manager 
+	bindsym $mod+r exec $spawn ranger terminal
+	# $mod+d: Dropdown terminal scratchpad 
+	bindsym $mod+d exec $spawn zsh dropdown
+	# $mod+Return: Launch Kitty main terminal session 
+	bindsym $mod+Return exec $spawn Main_Terminal session
+	# $mod+Shift+Return: Launch a kitty terminal 
+	bindsym $mod+Shift+Return exec $TERMINAL
+	# $mod+Shift+n: Launch Network Manager Configuration 
+	bindsym $mod+Shift+n exec $spawn nmtui terminal
+	# $mod+c: Dropdown calculator scratchpad 
+	bindsym $mod+c exec $spawn bc dropdown
+	# $mod+Shift+b: Launch Bluetooth configuration 
+	bindsym $mod+Shift+b exec bluetoothctl terminal
+
+ 	# XF86 explorer key 
+	bindsym XF86Explorer exec $spawn $FILE terminal
+ 	# XF86 calculator key
+	bindsym XF86Calculator spawn bc dropdown
+
+#
+# Extra Microsoft 4000 XF86 Launch Keys
+#
+ 	#bindsym XF86Launch5
+ 	#bindsym XF86Launch6
+ 	#bindsym XF86Launch7
+ 	#bindsym XF86Launch8
+ 	#bindsym XF86Launch9

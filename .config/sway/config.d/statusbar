@@ -1,0 +1,15 @@
+#
+# Sway Status Bar Settings
+#
+
+#
+# Start Waybar and Tray apps
+#
+        # Waybar
+        exec waybar_launch
+
+        # Start redshift
+        exec redshift-gtk -c ~/.config/redshift/redshift.conf 
+        # Start Bluetooth applet
+        exec blueman-applet
+

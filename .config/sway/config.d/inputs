@@ -1,6 +1,19 @@
 #
-# Input Configurations
+# Sway Input Settings
 #
+
+#
+# Input Defaults
+#
+        # Hide mouse cursor
+        seat * hide_cursor 6000
+        # Drag and resize floating windows with $mod key
+        floating_modifier $mod normal
+
+#
+# Input Configuration
+#
+
 	# Trackpad
 	input "1739:0:Synaptics_TM3053-004" {
 		dwt enabled
@@ -12,7 +25,7 @@
 	# Keyboard
 	input * {
 		xkb_layout us,us(colemak)
-		# xkb_options caps:backspace,grp:alts_toggle,grp_led:scroll,altwin:menu_win,shift:both_capslock_cancel
+		#xkb_options caps:backspace,grp:alts_toggle,grp_led:scroll,altwin:menu_win,shift:both_capslock_cancel
 		xkb_options caps:backspace
 		xkb_numlock enable 
 	}

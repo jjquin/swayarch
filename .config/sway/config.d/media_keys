@@ -1,0 +1,68 @@
+#
+# Media Keybindings
+#
+
+#
+# Set Volume Keybinding variables
+#
+	# Control Volume
+	set $adjust_vol pactl set-sink-volume @DEFAULT_SINK@
+	# Mute Volume
+	set $mute_vol pactl set-sink-mute @DEFAULT_SINK@ toggle
+	# Mute Microphone
+	set $mute_mic pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+#
+# Set Media Keybinding variables
+#
+	# Previous Song
+	set $prev_song playerctl previous
+	# Next Song
+	set $next_song playerctl next
+	# Play/Pause
+	set $play_pause playerctl play-pause
+	# Skip Backward
+	set $skip_backward playerctl position 10 -
+	# Skip Forward
+	set $skip_forward playerctl position 10 +
+
+#
+# Volume & Mic Keybindings
+#
+	# $mod+minus: Lower volume 5% 
+	bindsym $mod+minus exec $adjust_vol -5%
+	# $mod+Shift+minus: Lower volume 20% 
+	bindsym $mod+Shift+minus exec $adjust_vol -20%
+	# $mod+equal: Raise volume 5% 
+	bindsym $mod+equal exec $adjust_vol +5%
+	# $mod+Shift+equal: Raise volume 20% 
+	bindsym $mod+Shift+equal exec $adjust_vol +20%
+	# $mod+semicolon: Emergency Key 
+	#bindsym $mod+semicolon exec emergency-hide
+	# $mod+Shift+semicolon: Toggle mute volume 
+	bindsym $mod+Shift+semicolon exec $mute_vol
+
+ 	# XF86 & Volume Keys
+	bindsym XF86AudioMute exec $mute_vol
+ 	bindsym XF86AudioLowerVolume exec $adjust_vol -5%
+ 	bindsym XF86AudioRaiseVolume exec  $adjust_vol +5%
+
+	# XF86 Mic Mute Toggle Key
+	bindsym XF86AudioMicMute exec $mute_mic 
+
+#
+# Media Keybindings
+#
+	# $mod+bracketleft: Back to previous song/video 
+	bindsym $mod+bracketleft exec $prev_song
+	# $mod+bracketright: Skip to next song/video 
+	bindsym $mod+bracketright exec $next_song
+	# $mod+Shift+bracketleft: Skip backward 10 seconds in song/video 
+	bindsym $mod+Shift+bracketleft exec $skip_backward
+	# $mod+Shift+bracketright: Skip forward 10 seconds in song/video 
+	bindsym $mod+Shift+bracketright exec $skip_forward
+	# $mod+Shift+m: play/pause song/video 
+	bindsym $mod+Shift+m exec $play_pause
+	
+ 	# XF86 Pause/Play Key
+	bindsym XF86AudioPlay exec $play_pause

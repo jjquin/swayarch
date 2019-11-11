@@ -1,0 +1,25 @@
+#
+# Sway Lock and Idle Settings
+#
+
+#
+# Idle/Lock Configuration
+# 
+	# Lock after 5 min, displays off after 10 min, lock after suspend
+        exec swayidle -w \
+                timeout 300 'lock' \
+                timeout 600 'swaymsg "output * dpms off"' \
+                        resume 'swaymsg "output * dpms on"' \
+                before-sleep 'lock' 
+
+	# Inhibit Idle if a window is fullscreen
+	for_window [class="^.*"] inhibit_idle fullscreen
+	for_window [app_id="^.*"] inhibit_idle fullscreen
+
+#
+# Lock Keybindings 
+#
+        # $mod+s: Lock screen 
+        bindsym $mod+s exec lock off
+        # $mod+Shift+s: Lock and Suspend Thinkpad 
+        bindsym $mod+Shift+s exec sudo systemctl suspend

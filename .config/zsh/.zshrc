@@ -69,6 +69,12 @@ lfcd () {
     fi
 }
 
+function open () {
+	T=`xdg-mime query filetype $1`
+	echo "opening file "  $1  " of type " $T "with " `xdg-mime query default $T`
+	nohup xdg-open $1 >/dev/null 2>&1 &
+}
+
 bindkey -s '^o' 'lfcd\n'  # zsh
 
 # Load zsh-syntax-highlighting; should be last.

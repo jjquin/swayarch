@@ -17,6 +17,9 @@ alias \
 # Colorize commands when possible.
 alias \
 	ls="ls -hN --color=auto --group-directories-first" \
+	l="ls -la" \
+	la="ls -a" \
+	ll="ls -l"
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi"
@@ -45,15 +48,34 @@ alias \
 	ref="shortcuts >/dev/null; source ~/.config/shortcutrc" \
 	weath="less -S ~/.local/share/weatherreport" \
 
-alias dotf='/usr/bin/git --git-dir=$HOME/Code/dotfiles/ --work-tree=$HOME'
 
 alias yay='yay --answerdiff N'
 alias bc='bc ql'
 alias vim='nvim' \
-	vi='nvim'
+	vi='nvim' \
+	v='nvim'
 
-alias ls="ls --group-directories-first -h --color=always" \
-	l="ls -la" \
-	la="ls -a" \
-	ll="ls -l"
 
+alias h='htop'
+
+alias v.aliases="$EDITOR ~/.dotfiles/configs/zsh/aliasrc"
+alias v.sway="$EDITOR ~/.dotfiles/configs/sway/config"
+alias v.kitty="$EDITOR ~/.dotfiles/configs/kitty/kitty.conf"
+alias v.mpv="$EDITOR ~/.dotfiles/configs/mpv/linux-mpv.conf"
+alias v.nvim="$EDITOR ~/.dotfiles/configs/nvim/init.vim"
+alias v.waybar="$EDITOR ~/.dotfiles/configs/waybar/config"
+alias v.zsh="$EDITOR ~/.dotfiles/configs/zsh/.zshrc"
+alias v.zshenv="$EDITOR ~/.dotfiles/configs/.zshenv"
+alias v.zprofile="$EDITOR ~/.dotfiles/configs/zsh/.zprofile"
+alias v.ranger="$EDITOR ~/.dotfiles/configs/zsh/rc.conf"
+
+# Managing dotfiles / otherwise that is a lot of typting for routine file managment
+alias	dotf="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME" \
+		dota="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME add" \
+		dots="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME status -uno" \
+		dotc="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME commit" \
+		dotm="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME commit -m" \
+		dotb="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME branch" \
+		dotch="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME checkout" \
+		dotl="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME log --oneline" \
+		dotd="/usr/bin/git --git-dir=$HOME/Code/dotfiles --work-tree=$HOME diff"

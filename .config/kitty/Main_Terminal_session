@@ -1,7 +1,14 @@
 layout tall
 cd ~
 launch zsh
-new_tab Ranger
+new_tab Rgr_Config
+cd $HOME/.config
+launch ranger 
+new_tab Rgr_LocalBin
+cd $HOME/.local/bin
+launch ranger
+new_tab Rgr_Code
+cd $HOME/Code
 launch ranger
 
 

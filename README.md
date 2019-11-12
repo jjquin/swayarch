@@ -1,8 +1,8 @@
-#JJ's dotfiles for Sway and Arch Linux
+# JJ's dotfiles for Sway and Arch Linux
 
 These are still a work in progress.
 
-##Main Software
+## Main Software
 
 - Distribution: Arch Linux
 - Filesystem: ZFS
@@ -20,5 +20,4 @@ These are still a work in progress.
 - PDF viewer: zathura
 - Email: Thunderbird (looking at mutt)
 - Video player: mpv
--  
 

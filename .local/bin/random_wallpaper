@@ -3,36 +3,33 @@
 #
 # random_wallpaer
 # 
-# Desc: This discovers the number of active displays and sets
-# a separate random wallpaper for each.  I checks the number
-# of displays to find the correct display names whether my
-# notebook is docked or not.  You can edit the display names
-# and the no of displays to check if you only use two
-# 
+# Desc: This discovers the names of the active displays and sets
+# a separate random wallpaper for each.  
+#
 # Requirements
 # swaywm and swaybg to set wallpaper
 #
 
+# Get outputs/displays from swaymsg
+DISPLAYS=$(swaymsg --type get_outputs --raw | jq --raw-output '.[] |select(.active) | .name')
 
-NODISPLAYS=$(echo $(swaymsg -t get_outputs | grep DP | wc -l ))
+# Define directory for wallpapers and cache directory for current wallpapers
 WALLPAPER_DIR="$HOME/Media/Pictures/wallpaper/1900"
 CACHE_DIR="$HOME/.cache"
 
-if [[ NODISPLAYS -gt 2 ]]
-then
-	DISPLAYS="DP-3 DP-4 DP-5"
-else
-	DISPLAYS="HDMI-1-A eDP-1"
-fi
 
-killall swaybg
+killall swaybg # Kill swaybg before assigning wallpaer
 
+# Cycle through outputs/displays
 count=1
 for OUTPUT in $DISPLAYS
 do
-	WALLPAPER=$CACHE_DIR/wallpaper$count.jpg
-	ln -fs $WALLPAPER_DIR/$(ls $WALLPAPER_DIR | shuf -n 1) $WALLPAPER
+	WALLPAPER=$CACHE_DIR/wallpaper$count.jpg # Set cached current wallpaper name
 
+	# link random wallpaper to cached directory
+	ln -fs $WALLPAPER_DIR/$(ls $WALLPAPER_DIR | shuf -n 1) $WALLPAPER 
+
+	# assign cached wallpaper to correct display
 	swaymsg exec "swaybg -o $OUTPUT -i $WALLPAPER -m fill"
 	count=$((count + 1))
 done

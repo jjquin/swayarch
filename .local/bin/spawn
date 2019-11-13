@@ -3,67 +3,83 @@
 #
 # spawn
 #
-# Desc: This script changes focus to a specific program if it is
-# running or launches it if it is not.  It also handles Kitty 
-# Sessions, Dropdown floating windows and terminal apps. 
-# Note the Dropdown apps must be terminal apps sinces that is what
-# I use.  A simple change to the dropdown change can fix it.
+# Desc: switches focus to an application if it is running
+# if not it starts the application
 #
-# Requirements:
-# Sway - for focus
-# Kitty - can easily change the terminal app except for the specific
-# kitty session option
+# Requirements
+# Swaymsg
+# jq
+# kitty terminal emulator (can easily be changed to work
+#       another terminal as long as it can assign the title
 #
+# Arguments:
+# 1: name of application or session
+# 2: type if the application is a dropdown, session or terminal app
+#
+
 
 [ -z "$1" ] && exit
 
-app="$1"
-lookup="$1"
-execs="$1"
+APP_NAME=$1
 
-if [ ! -z "$2" ]
-then
-	case $2 in
-		"session")
-			execs="kitty --title=\"$app\" --session=\"$HOME/.config/kitty/$app"_session\"""
-			;;
-		"dropdown")
-			lookup="Dropdown $app"
-			execs="kitty --title=\"$lookup\" $app"
-			;;
-		"terminal")
-			lookup="$app - Kitty"
-			execs="kitty --title=\"$lookup\" $app" 
-			 ;;
-	esac
-fi
+# Compares the requested app to running apps list if it finds it it returns
+# only the name of the keys where it is found (i.e. app_id, class, or title)
+RUNNING_APP_TYPES=$(swaymsg -t get_tree | jq -r --arg TEST_APP $APP_NAME 'recurse(.nodes[]?) 
+	| recurse(.floating_nodes[]?) 
+	| select(.type=="floating_con" or .type=="con") 
+	| {app_id: .app_id, class: .window_properties.class, title: .name} 
+	| with_entries(select(.value!=null)) 
+	| with_entries(select(.value|test($TEST_APP))) | keys')
 
+# Gets just the first key name in the list.  The list is sorted by the best 
+# match (app_id, class, title) so that the right window is chosen
+BEST_APP_TYPE=$(echo $RUNNING_APP_TYPES | awk -F'"' '$0=$2' | awk 'NR==1{print $1}')
 
-results=$(swaymsg -t get_tree | grep "$lookup")
+# Converts the second argument to lowercase
+APP_TYPE=$( echo "$2" | awk '{print tolower($0)}')
 
-
-if [[ $results =~ "\"app_id\": \"$lookup\"" ]]
-then 
-	echo "$lookup detected"
-	swaymsg [app_id="(?i)$app"] focus
-elif [[ $results =~ "$lookup" ]]
-then
-	echo "$lookup detected"
-	if [[ $lookup =~ "Dropdown $app" ]]
-	then
-		swaymsg "[title=\"$lookup\"] scratchpad show; [title=\"$lookup\"] move position center; [title=\"$lookup\"] resize set 800 900"
-	else
-		swaymsg [title="(?i)$app"] focus
-	fi
-else 
-	swaymsg exec "$execs"
-	if [[ $lookup =~ "Dropdown $app" ]]
-	then
-		sleep 1
-        	swaymsg "[title=\"$lookup\"] move scratchpad"
-		swaymsg "[title=\"$lookup\"] scratchpad show; [title=\"$lookup\"] move position center; [title=\"$lookup\"] resize set 800 900"
-	fi
-fi
-
-
+case $APP_TYPE in
+	"session") 
+		# Kitty session - session files are stored in $HOME/.config/kitty and
+		# should have the name of window title you want (i.e. wintitle_session)
+		if [[ $RUNNING_APP_TYPES =~ "title" ]]
+		then
+			swaymsg "[title=\"$APP_NAME\"] focus"
+		else
+			swaymsg exec "kitty --title=\"$APP_NAME\" --session=\"$HOME/.config/kitty/$APP_NAME"_session\"""
+		fi
+		;;
+	"dropdown") 
+		# Dropdown terminal apps that are hidden in the scratchpad
+		# and this script will bring each forward when called
+		# Only terminal apps are supported at this time
+		if [[ ! $RUNNING_APP_TYPES =~ "title" ]]
+		then
+			swaymsg exec "kitty --title=\"Dropdown $APP_NAME\" $APP_NAME"
+			sleep 1
+			swaymsg '[title=\"$Dropdown $APP_NAME\"] move scratchpad'
+		fi
+		swaymsg "[title=\"Dropdown $APP_NAME\"] scratchpad show; \
+			[title=\"Dropdown $APP_NAME\"] move position center; \
+			[title=\"Dropdown $APP_NAME\"] resize set 600 500"
+		;;
+	"terminal")
+		# Terminal apps are run with kitty with the title: "appname - kitty"
+		if [[ $RUNNING_APP_TYPE =~ "title" ]]
+		then
+			swaymsg "[title=\"$APP_NAME\"] focus"
+		else
+			swaymsg exec "kitty --title=\"$APP_NAME - Kitty\" $APP_NAME"
+		fi
+		;;
+	*)
+		# All other applications
+		if [ -z $BEST_APP_TYPE ] 
+		then
+			swaymsg exec $APP_NAME
+		else
+			swaymsg "[$BEST_APP_TYPE=\"$APP_NAME\"] focus"
+		fi
+		;;
+esac
 

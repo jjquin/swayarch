@@ -21,6 +21,8 @@
 	# mod+Shift+r: Restart sway 
 	bindsym $mod+Shift+r restart
 
+	# $mod+Shift+x: web search.privacytools.io
+	bindsym $mod+Shift+x exec web_searx
 	# $mod+Shift+c: Reload Sway configuration 
 	bindsym $mod+Shift+c reload
 

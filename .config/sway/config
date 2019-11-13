@@ -8,7 +8,7 @@
 # Set Mod variables
 #
 	# Super key = mod key
-	set $mod Mod4
+	set $mod Mod3
 	
 #
 # Include files in config.d directory

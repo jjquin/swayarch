@@ -6,28 +6,28 @@
 # Default workspaces for common programs
 #
 	# Workspace 1 - Web
-	assign [app_id="(^firefox$|qutebrowser|brave)"] $ws1
+	assign [app_id="(^firefox$|qutebrowser|brave)"] 1
 	# Workspace 2 - Email
-	assign [app_id="^thunderbird$"] $ws2
+	assign [app_id="^thunderbird$"] 2
 	# Workspace 3 - Chat/IRC
-	assign [app_id="(telegram|TelegramDesktop)"] $ws3
+	assign [app_id="(telegram|TelegramDesktop)"] 3
 	# Workspace 4 - Terminal
-	assign [title="Main_Terminal"] $ws4
+	assign [title="Main_Terminal"] 4
 	# Workspace 5 - Editor
-	assign [app_id="emacs"] $ws5
+	assign [title="emacs"] 5
 	# Workspace 6 - Office
-	assign [app_id="libreoffice"] $ws6
+	assign [app_id="libreoffice"] 6
 	# Workspace 7 - Video
-	assign [app_id="mpv"] $ws7
-	assign [title="VLC media player"] $ws7
+	assign [app_id="mpv"] 7
+	assign [title="VLC media player"] 7
 	# Workspace 8 - Audio
-	assign [app_id="(lollypop|mumble)"] $ws8
+	assign [app_id="(lollypop|mumble)"] 8
 	# Workspace 9 - Images
-	assign [app_id="gimp"] $ws9
-	assign [title="GIMP Startup"] $ws9
+	assign [app_id="gimp"] 9
+	assign [title="GIMP Startup"] 9
 	# Workspace 10 - Books
-	assign [app_id="calibre"] $ws10
-	assign [app_id="((?i)foliate|(?i)fbreader)"] $ws10
+	assign [app_id="calibre"] 10
+	assign [app_id="((?i)foliate|(?i)fbreader)"] 10
 
 
 	# Auto float apps
@@ -65,6 +65,9 @@
 	for_window [window_type="menu"] floating enable
 	for_window [instance="update_installer"] floating enable	
 
+	# float terminal menu
+	for_window [title="^launcher$"] floating enable, border none, opacity 0.8, resize set 400 300, move position center
+
 	# Tag xwayland windows as such
 	for_window [shell="xwayland"] title_format "<span>[X] %title</span>"
 #
@@ -80,4 +83,13 @@
         for_window [title="Dropdown *"] border pixel 3
         for_window [title="Dropdown *"] move position center	
 
+        # General dropdown window traits. The order can matter.
+        for_window [title="Dropdown Launcher*"] floating enable
+        for_window [title="Dropdown Launcher*"] move scratchpad
+        for_window [title="Dropdown Launcher*"] sticky enable
+        for_window [title="Dropdown Launcher*"] scratchpad show
+        for_window [title="Dropdown Launcher*"] resize set width 225
+        for_window [title="Dropdown Launcher*"] resize set height 100
+        for_window [title="Dropdown Launcher*"] border pixel 0
+        for_window [title="Dropdown Launcher*"] move position center	
 	

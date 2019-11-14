@@ -103,24 +103,24 @@
 # Terminal Application Keybindings
 # 
 	# $mod+r: Launch default file manager 
-	bindsym $mod+r exec $spawn ranger terminal
+	bindsym $mod+r exec $spawn ranger
 	# $mod+d: Dropdown terminal scratchpad 
-	bindsym $mod+d exec $spawn zsh dropdown
+	bindsym $mod+d exec $spawn zsh
 	# $mod+Return: Launch Kitty main terminal session 
-	bindsym $mod+Return exec $spawn Main_Terminal session
+	bindsym $mod+Return exec $spawn Main_Terminal
 	# $mod+Shift+Return: Launch a kitty terminal 
 	bindsym $mod+Shift+Return exec $TERMINAL
 	# $mod+Shift+n: Launch Network Manager Configuration 
-	bindsym $mod+Shift+n exec $spawn nmtui terminal
+	bindsym $mod+Shift+n exec $spawn nmtui
 	# $mod+c: Dropdown calculator scratchpad 
-	bindsym $mod+c exec $spawn bc dropdown
+	bindsym $mod+c exec $spawn bc
 	# $mod+Shift+b: Launch Bluetooth configuration 
-	bindsym $mod+Shift+b exec bluetoothctl terminal
+	bindsym $mod+Shift+b exec bluetoothctl
 
  	# XF86 explorer key 
-	bindsym XF86Explorer exec $spawn $FILE terminal
+	bindsym XF86Explorer exec $spawn $FILE
  	# XF86 calculator key
-	bindsym XF86Calculator spawn bc dropdown
+	bindsym XF86Calculator spawn bc
 
 #
 # Extra Microsoft 4000 XF86 Launch Keys

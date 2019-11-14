@@ -14,7 +14,7 @@
 	# Workspace 4 - Terminal
 	assign [title="Main_Terminal"] 4
 	# Workspace 5 - Editor
-	assign [title="emacs"] 5
+	assign [class="Emacs"] 5
 	# Workspace 6 - Office
 	assign [app_id="libreoffice"] 6
 	# Workspace 7 - Video
@@ -34,7 +34,7 @@
 	for_window [app_id="system-config-printer"] floating enable
 	for_window [app_id="gnome-calculator"] floating enable
 	for_window [app_id="keepassxc"] floating enable
-	for_window [app_id="(?i)Lxappearance$"] floating enable
+	for_window [class="(?i)Lxappearance$"] floating enable
 	for_window [app_id="(?i)mpv"] floating enable
 	for_window [app_id="pavucontrol"] floating enable
 	for_window [app_id="(?i)thunar"] floating enable

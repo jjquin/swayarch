@@ -14,72 +14,90 @@
 #
 # Arguments:
 # 1: name of application or session
-# 2: type if the application is a dropdown, session or terminal app
 #
+
+function get_command () {
+	# Function checks for a .desktop file that matches the app name and sets the 
+	# command to open the app to the 1st Exec statement in the .desktop file
+	# if Terminal=true in the .desktop file it start the terminal with the app
+	# name and if no .desktop file exists it simply attempts to start the app
+	DESKTOP_FILE=$(ls -d $HOME/.local/share/applications/* /usr/share/applications/* \
+		| grep -i "$1" \
+		| awk 'NR==1{print $1}' )
+	if [ -z $DESKTOP_FILE ]
+	then
+		COMM=$1
+	else
+		COMM=$(grep '^Exec' $DESKTOP_FILE | head -1  \
+			| sed 's/^Exec=//' | sed 's/%.//' | sed 's/^"//g' | sed 's/" *$//g')
+		if [ -z $DESKTOP_FILE ] || grep "Terminal=true" $DESKTOP_FILE
+		then
+			COMM="$TERMINAL -e $1"
+		fi
+	fi
+	echo $COMM
+}
+
+function app_running () {
+	# Compares the requested app to running apps list if it finds it it returns
+	# only the name of the keys where it is found (i.e. app_id, class, or title)
+	RUNNING_APP_TYPES=$(swaymsg -t get_tree | jq -r --arg TEST_APP "$1" 'recurse(.nodes[]?) 
+		| recurse(.floating_nodes[]?) 
+		| select(.type=="floating_con" or .type=="con") 
+		| {app_id: .app_id, class: .window_properties.class, title: .name} 
+		| with_entries(select(.value!=null)) 
+		| with_entries(select(.value|test($TEST_APP))) | keys')
+	
+	# Gets just the first key name in the list.  The list is sorted by the best 
+	# match (app_id, class, title) so that the right window is chosen
+	echo $(echo $RUNNING_APP_TYPES | awk -F'"' '$0=$2' | awk 'NR==1{print $1}')
+}
 
 
 [ -z "$1" ] && exit
-
 APP_NAME=$1
 
-# Compares the requested app to running apps list if it finds it it returns
-# only the name of the keys where it is found (i.e. app_id, class, or title)
-RUNNING_APP_TYPES=$(swaymsg -t get_tree | jq -r --arg TEST_APP $APP_NAME 'recurse(.nodes[]?) 
-	| recurse(.floating_nodes[]?) 
-	| select(.type=="floating_con" or .type=="con") 
-	| {app_id: .app_id, class: .window_properties.class, title: .name} 
-	| with_entries(select(.value!=null)) 
-	| with_entries(select(.value|test($TEST_APP))) | keys')
+DROPDOWN_APPS="bc\nzsh"
 
-# Gets just the first key name in the list.  The list is sorted by the best 
-# match (app_id, class, title) so that the right window is chosen
-BEST_APP_TYPE=$(echo $RUNNING_APP_TYPES | awk -F'"' '$0=$2' | awk 'NR==1{print $1}')
-
-# Converts the second argument to lowercase
-APP_TYPE=$( echo "$2" | awk '{print tolower($0)}')
-
-case $APP_TYPE in
-	"session") 
-		# Kitty session - session files are stored in $HOME/.config/kitty and
-		# should have the name of window title you want (i.e. wintitle_session)
-		if [[ $RUNNING_APP_TYPES =~ "title" ]]
+if ! echo $DROPDOWN_APPS | grep -qi $APP_NAME 
+then
+	APP_TYPE=$(app_running $APP_NAME)
+	if [ ! -z $APP_TYPE ]
+	then
+		swaymsg "[$APP_TYPE=\"$APP_NAME\"] focus"
+	else
+		if [ "$TERMINAL" == "kitty" ] && [ -f $HOME"/.config/kitty/"$1"_session" ]
 		then
-			swaymsg "[title=\"$APP_NAME\"] focus"
+			swaymsg exec -- "kitty --title=\"$APP_NAME\" --session=\""$HOME"/.config/kitty/"$1"_session\""
 		else
-			swaymsg exec "kitty --title=\"$APP_NAME\" --session=\"$HOME/.config/kitty/$APP_NAME"_session\"""
+			swaymsg exec -- $(get_command $APP_NAME) 
 		fi
-		;;
-	"dropdown") 
-		# Dropdown terminal apps that are hidden in the scratchpad
-		# and this script will bring each forward when called
-		# Only terminal apps are supported at this time
-		if [[ ! $RUNNING_APP_TYPES =~ "title" ]]
-		then
-			swaymsg exec "kitty --title=\"Dropdown $APP_NAME\" $APP_NAME"
+		until [ ! -z $APP_TYPE ]
+		do
 			sleep 1
-			swaymsg '[title=\"$Dropdown $APP_NAME\"] move scratchpad'
-		fi
-		swaymsg "[title=\"Dropdown $APP_NAME\"] scratchpad show; \
-			[title=\"Dropdown $APP_NAME\"] move position center; \
-			[title=\"Dropdown $APP_NAME\"] resize set 600 500"
-		;;
-	"terminal")
-		# Terminal apps are run with kitty with the title: "appname - kitty"
-		if [[ $RUNNING_APP_TYPE =~ "title" ]]
-		then
-			swaymsg "[title=\"$APP_NAME\"] focus"
-		else
-			swaymsg exec "kitty --title=\"$APP_NAME - Kitty\" $APP_NAME"
-		fi
-		;;
-	*)
-		# All other applications
-		if [ -z $BEST_APP_TYPE ] 
-		then
-			swaymsg exec $APP_NAME
-		else
-			swaymsg "[$BEST_APP_TYPE=\"$APP_NAME\"] focus"
-		fi
-		;;
-esac
+			APP_TYPE=$(app_running $APP_NAME)
+		done
+		swaymsg "[$APP_TYPE=\"$APP_NAME\"] focus" 
+	fi
+else
+	# Dropdown terminal apps that are hidden in the scratchpad
+	# and this script will bring each forward when called
+	# Only terminal apps are supported at this time
+	WIN_TITLE="Dropdown_"$APP_NAME
+	APP_TYPE=$(app_running $WIN_TITLE)
+	echo app name $APP_NAME
+	echo title $WIN_TITLE
+	echo app type $APP_TYPE
+	echo running $RUNNING_APP_TYPES
+
+	if [ -z $APP_TYPE ]
+	then
+		swaymsg exec -- "kitty --title=\"$WIN_TITLE\" $APP_NAME"
+		sleep 1
+		swaymsg "[title=\"$WIN_TITLE\"] move scratchpad"
+	fi
+	swaymsg "[title=\"$WIN_TITLE\"] scratchpad show; \
+		[title=\"$WIN_TITLE\"] move position center; \
+		[title=\"$WIN_TITLE\"] resize set 600 500"
+fi
 

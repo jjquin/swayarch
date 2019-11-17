@@ -20,6 +20,6 @@
 # Lock Keybindings 
 #
         # $mod+s: Lock screen 
-        bindsym $mod+s exec lock off
+        bindsym $mod+s exec swaylock -f -c 000000 -i ~/.cache/wallpaper3.jpg
         # $mod+Shift+s: Lock and Suspend Thinkpad 
         bindsym $mod+Shift+s exec sudo systemctl suspend

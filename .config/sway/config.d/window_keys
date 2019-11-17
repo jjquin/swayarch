@@ -30,10 +30,10 @@
 	#bindsym $mod+$right focus right
 
 	# Or use arrow keys
-	bindsym $mod+Left focus left
-	bindsym $mod+Down focus down
-	bindsym $mod+Up focus up
-	bindsym $mod+Right focus right
+	# bindsym $mod+Left focus left
+	# bindsym $mod+Down focus down
+	# bindsym $mod+Up focus up
+	# bindsym $mod+Right focus right
 
 	# $mod+Shift+$left: Move focused window to the left 
 	#bindsym $mod+Shift+$left move left
@@ -45,10 +45,10 @@
 	#bindsym $mod+Shift+$right move right
 
 	# Ditto, with arrow keys
-	bindsym $mod+Shift+Left move left
-	bindsym $mod+Shift+Down move down
-	bindsym $mod+Shift+Up move up
-	bindsym $mod+Shift+Right move right
+	# bindsym $mod+Shift+Left move left
+	# bindsym $mod+Shift+Down move down
+	# bindsym $mod+Shift+Up move up
+	# bindsym $mod+Shift+Right move right
 
 
 #

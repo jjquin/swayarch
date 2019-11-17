@@ -40,11 +40,11 @@
 	# $mod+comma: Switch to previous workspace 
 	bindsym $mod+comma workspace prev
 	# $mod+$right: Switch to previous workspace
-	bindsym $mod+$right workspace prev
+	bindsym $mod+$left workspace prev
 	# $mod+period: Switch to next workspace 
 	bindsym $mod+period workspace next
 	# $mod+$left: Switch to next workspace
-	bindsym $mod+$left workspace next
+	bindsym $mod+$right workspace next
 	# $mod+slash: Switch workspack back and forth 
 	bindsym $mod+slash workspace back_and_forth
 

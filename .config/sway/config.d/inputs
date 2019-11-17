@@ -26,9 +26,9 @@
 
 	# Keyboard
 	input * {
-		xkb_layout us,us(colemak)
-		#xkb_options caps:backspace,grp:alts_toggle,grp_led:scroll,altwin:menu_win,shift:both_capslock_cancel
+		xkb_layout us,us-colemak-wide
 		xkb_options caps:hyper,grp:sclk_toggle,grp_led:scroll
+		# xkb_options grp:sclk_toggle,grp_led:scroll
 		xkb_numlock enable 
 	}
 

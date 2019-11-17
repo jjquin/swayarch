@@ -1,0 +1,57 @@
+
+default partial alphanumeric_keys 
+xkb_symbols "basic" {
+
+    include "us"
+    name[group1] = "English (Colemak Mod DH Wide)";
+
+    key <AD01> { [            q,            Q, singlelowquotemark, doublelowquotemark ] };
+    key <AD02> { [            w,            W, leftsinglequotemark, leftdoublequotemark ] };
+    key <AD03> { [            f,            F, rightsinglequotemark, rightdoublequotemark ] };
+    key <AD04> { [            p,            P,     Greek_pi,    paragraph ] };
+    key <AD05> { [            b,            B, enfilledcircbullet,   Greek_beta ] };
+    key <AD06> { [  bracketleft,    braceleft,        aring,        Aring ] };
+    key <AD07> { [            j,            J,        U0283,        U01A9 ] };
+    key <AD08> { [            l,            L,      lstroke,      Lstroke ] };
+    key <AD09> { [            u,            U,        U2039, guillemotleft ] };
+    key <AD10> { [            y,            Y,        U203A, guillemotright ] };
+    key <AD11> { [    semicolon,        colon, dead_diaeresis,     ellipsis ] };
+    key <AD12> { [   apostrophe,     quotedbl,   dead_acute,      minutes ] };
+    key <BKSL> { [    backslash,          bar,   dead_grave,    brokenbar ] };
+    key <AC01> { [            a,            A,      dstroke,  Greek_alpha ] };
+    key <AC02> { [            r,            R,   registered,    trademark ] };
+    key <AC03> { [            s,            S,       ssharp,      section ] };
+    key <AC04> { [            t,            T,        thorn,        THORN ] };
+    key <AC05> { [            g,            G,          eng,          ENG ] };
+    key <AC06> { [ bracketright,   braceright,           ae,           AE ] };
+    key <AC07> { [            k,            K,     ccedilla,     Ccedilla ] };
+    key <AC08> { [            n,            N,       endash,      uparrow ] };
+    key <AC09> { [            e,            E,     EuroSign,    leftarrow ] };
+    key <AC10> { [            i,            I,       emdash,   rightarrow ] };
+    key <AC11> { [            o,            O,    masculine,  ordfeminine ] };
+    key <AB01> { [            x,            X,       dagger, doubledagger ] };
+    key <AB02> { [            c,            C,    copyright,         cent ] };
+    key <AB03> { [            d,            D,          eth,          ETH ] };
+    key <AB04> { [            v,            V,     division,  Greek_gamma ] };
+    key <AB05> { [            z,            Z,          ezh,          EZH ] };
+    key <AB06> { [        slash,     question, questiondown,  dead_stroke ] };
+    key <AB07> { [            m,            M,     multiply,    downarrow ] };
+    key <AB08> { [            h,            H,      hstroke,      Hstroke ] };
+    key <AB09> { [        comma,         less, dead_cedilla,  lessthatequal ] };
+    key <AB10> { [       period,      greater, dead_abovecot, greatherthanequal ] };
+    key <TLDE> { [        grave,   asciitilde,   dead_tilde,        U2248 ] };
+    key <AE01> { [            1,       exclam, dead_belowdot,   exclamdown ] };
+    key <AE02> { [            2,           at,    dead_hook,  twosuperior ] };
+    key <AE03> { [            3,   numbersign,    dead_horn, threesuperior ] };
+    key <AE04> { [            4,       dollar, dead_currency,     sterling ] };
+    key <AE05> { [            5,      percent,           mu,     permille ] };
+    key <AE06> { [        equal,         plus,     multiply,     division ] };
+    key <AE07> { [            6,  asciicircum, dead_circumflex, partialderivative ] };
+    key <AE08> { [            7,    ampersand,   dead_caron,      notsign ] };
+    key <AE09> { [            8,     asterisk,  dead_ogonek,     infinity ] };
+    key <AE10> { [            9,    parenleft,   dead_breve, periodcentered ] };
+    key <AE11> { [            0,   parenright, dead_abovering,       degree ] };
+    key <AE12> { [        minus,   underscore,  dead_macron,    plusminus ] };
+    
+    include "level3(ralt_switch)"
+};

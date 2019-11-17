@@ -1,0 +1,48 @@
+
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    
+    include "us"
+    name[group1] = "English (Colemak Wide)";
+    key <AE07> { [        equal,         plus,     multiply,     division ] };
+    key <AE08> { [            7,    ampersand,          eth,          ETH ] };
+    key <AE09> { [            8,     asterisk,        thorn,        THORN ] };
+    key <AE10> { [            9,    parenleft, leftsinglequotemark, leftdoublequotemark ] };
+    key <AE11> { [            0,   parenright, rightsinglequotemark, rightdoublequotemark ] };
+    key <AE12> { [        minus,   underscore,       endash,       emdash ] };
+    key <AD01> { [            q,            Q,   adiaeresis,   Adiaeresis ] };
+    key <AD02> { [            w,            W,        aring,        Aring ] };
+    key <AD03> { [            f,            F,       atilde,       Atilde ] };
+    key <AD04> { [            p,            P,       oslash,       Oslash ] };
+    key <AD05> { [            g,            G,  dead_ogonek,   asciitilde ] };
+    key <AD06> { [  bracketleft,    braceleft, guillemotleft,        U2039 ] };
+    key <AD07> { [            j,            J,      dstroke,      Dstroke ] };
+    key <AD08> { [            l,            L,      lstroke,      Lstroke ] };
+    key <AD09> { [            u,            U,       uacute,       Uacute ] };
+    key <AD10> { [            y,            Y,   udiaeresis,   Udiaeresis ] };
+    key <AD11> { [    semicolon,        colon,   odiaeresis,   Odiaeresis ] };
+    key <AD12> { [   apostrophe,     quotedbl,       otilde,       Otilde ] };
+    key <AC01> { [            a,            A,       aacute,       Aacute ] };
+    key <AC02> { [            r,            R,   dead_grave,   asciitilde ] };
+    key <AC03> { [            s,            S,       ssharp,   asciitilde ] };
+    key <AC04> { [            t,            T,   dead_acute, dead_doubleacute ] };
+    key <AC05> { [            d,            D, dead_diaeresis,   asciitilde ] };
+    key <AC06> { [ bracketright,   braceright, guillemotright,        U203A ] };
+    key <AC07> { [            h,            H,   dead_caron,   asciitilde ] };
+    key <AC08> { [            n,            N,       ntilde,       Ntilde ] };
+    key <AC09> { [            e,            E,       eacute,       Eacute ] };
+    key <AC10> { [            i,            I,       iacute,       Iacute ] };
+    key <AC11> { [            o,            O,       oacute,       Oacute ] };
+    key <AB01> { [            z,            Z,           ae,           AE ] };
+    key <AB02> { [            x,            X, dead_circumflex,   asciitilde ] };
+    key <AB03> { [            c,            C,     ccedilla,     Ccedilla ] };
+    key <AB04> { [            v,            V,           oe,           OE ] };
+    key <AB05> { [            b,            B,   dead_breve,   asciitilde ] };
+    key <AB06> { [        slash,     question, questiondown,   asciitilde ] };
+    key <AB07> { [            k,            K, dead_abovering,   asciitilde ] };
+    key <AB08> { [            m,            M,  dead_macron,   asciitilde ] };
+    key <AB09> { [        comma,         less, dead_cedilla,   asciitilde ] };
+    key <AB10> { [       period,      greater, dead_abovedot,   asciitilde ] };
+    key <BKSL> { [    backslash,          bar,   asciitilde,   asciitilde ] };
+    include "level3(ralt_switch)"
+};
